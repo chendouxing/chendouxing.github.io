@@ -1,19 +1,16 @@
 # Hexo Configuration
-## Docs: https://hexo.io/docs/configuration.html
-## Source: https://github.com/hexojs/hexo/
-
 # Site
-title: 编程の路
-subtitle: 'Coding成神之路!'
-description: '这辈子只管努力,剩下的交给命运!'
-keywords: Blog 
-author: BlueHole
+title: 大数据浪潮
+subtitle: '站在大数据之巅'
+description: '本站立足于大数据、数据仓库、数据挖掘的知识分享'
+keywords: Data Warehouse, Database、Big Data、Data Mining
+author: Bizard-Lab
 language: zh-CN
 timezone: 'Asia/Shanghai'
 
 # URL
 ## Set your site url here. For example, if you use GitHub Page, set url as 'https://username.github.io/project'
-url: https://WkCollection.github.io/
+url: https://chendouxing.github.io/
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -46,10 +43,10 @@ future: true
 highlight:
   enable: true
   line_number: true
-  auto_detect: true
+  auto_detect: false
   tab_replace: ''
   wrap: true
-  hljs: true
+  hljs: false
 prismjs:
   enable: false
   preprocess: true
@@ -62,7 +59,7 @@ prismjs:
 # order_by: Posts order. (Order by date descending by default)
 index_generator:
   path: ''
-  per_page: 5
+  per_page: 10
   order_by: -date
 
 # Category & Tag
@@ -85,7 +82,7 @@ updated_option: 'mtime'
 
 # Pagination
 ## Set per_page to 0 to disable pagination
-per_page: 5
+per_page: 10
 pagination_dir: page
 
 # Include / Exclude file(s)
@@ -97,24 +94,28 @@ ignore:
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-#theme: miracle
-#theme: yilia
-theme: next
+#theme: landscape
+theme: kira
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:
   type: 'git'
-  repo: git@github.com:chendouxing/chendouxing.github.io.git
+  repo: git@github.com:chendouxing/chendouxing.github.io.git 
   branch: main
-#
- next search
-#search:
-#  path: search.xml
-#  field: post
-#  content: true
-#  format: html
-symbols_count_time:
-  time: true
-  symbols: true
-  total_time: true
-  wpm: 150
+  
+# 搜索
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
+
+mathjax:
+  tags: none # or 'ams' or 'all'
+  single_dollars: true # enable single dollar signs as in-line math delimiters
+  cjk_width: 0.9 # relative CJK char width
+  normal_width: 0.6 # relative normal (monospace) width
+  append_css: true # add CSS to pages rendered by MathJax
+  every_page: false # if true, every page will be rendered by MathJax regardless the `mathjax` setting in Front-matter
+
+
