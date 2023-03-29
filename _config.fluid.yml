@@ -1,6 +1,6 @@
 # Hexo Configuration
 # Site
-title: 大数据浪潮
+title: 摩西摩西
 subtitle: '站在大数据之巅'
 description: '本站立足于大数据、数据仓库、数据挖掘的知识分享'
 keywords: Data Warehouse, Database、Big Data、Data Mining
@@ -117,5 +117,4 @@ mathjax:
   normal_width: 0.6 # relative normal (monospace) width
   append_css: true # add CSS to pages rendered by MathJax
   every_page: false # if true, every page will be rendered by MathJax regardless the `mathjax` setting in Front-matter
-
 
