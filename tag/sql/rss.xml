@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<rss version="2.0">
+    <channel>
+        <title>蟹堡王海星 • Posts by &#34;sql&#34; tag</title>
+        <link>https://chendouxing.github.io</link>
+        <description>花有重开日，人无再少年</description>
+        <language>zh-CN</language>
+        <pubDate>Fri, 31 Mar 2023 17:40:02 +0800</pubDate>
+        <lastBuildDate>Fri, 31 Mar 2023 17:40:02 +0800</lastBuildDate>
+        <category>计算机等级考试</category>
+        <category>语言</category>
+        <category>SQL</category>
+        <category>python</category>
+        <category>数学</category>
+        <category>课堂学习</category>
+        <category>考试</category>
+        <category>论文</category>
+        <item>
+            <guid isPermalink="true">https://chendouxing.github.io/2023/03/31/sql%E8%AF%AD%E5%8F%A5/</guid>
+            <title>sql语句</title>
+            <link>https://chendouxing.github.io/2023/03/31/sql%E8%AF%AD%E5%8F%A5/</link>
+            <category>语言</category>
+            <category>SQL</category>
+            <pubDate>Fri, 31 Mar 2023 17:40:02 +0800</pubDate>
+            <description><![CDATA[ &lt;link rel=&#34;stylesheet&#34; class=&#34;aplayer-secondary-style-marker&#34; href=&#34;\assets\css\APlayer.min.css&#34;&gt;&lt;script src=&#34;\assets\js\APlayer.min.js&#34; class=&#34;aplayer-secondary-script-marker&#34;&gt;&lt;/script&gt;&lt;h1 id=&#34;sql语句&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#sql语句&#34;&gt;#&lt;/a&gt; SQL 语句&lt;/h1&gt;
+&lt;h2 id=&#34;基本语句增删改查&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#基本语句增删改查&#34;&gt;#&lt;/a&gt; 基本语句–增删改查&lt;/h2&gt;
+&lt;p&gt;创建数据库&lt;/p&gt;
+&lt;figure class=&#34;highlight sql&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;code class=&#34;hljs sql&#34;&gt;&lt;span class=&#34;hljs-keyword&#34;&gt;create&lt;/span&gt; database 数据库名;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;img src=&#34;../images/image-20230331194126557.png&#34; alt=&#34;image-20230331194126557&#34;&gt;&lt;/p&gt;
+&lt;p&gt;使用测试库 mydb&lt;/p&gt;
+&lt;figure class=&#34;highlight sql&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;code class=&#34;hljs sql&#34;&gt;use 数据库名;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;img src=&#34;../images/image-20230331194214204.png&#34; alt=&#34;image-20230331194214204&#34;&gt;&lt;/p&gt;
+&lt;p&gt;创建数据表 orders&lt;/p&gt;
+&lt;figure class=&#34;highlight sql&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;code class=&#34;hljs sql&#34;&gt;&lt;span class=&#34;hljs-keyword&#34;&gt;create&lt;/span&gt; &lt;span class=&#34;hljs-keyword&#34;&gt;table&lt;/span&gt; &lt;span class=&#34;hljs-string&#34;&gt;&amp;#x27;表名&amp;#x27;&lt;/span&gt;(&lt;br&gt;    列名&lt;span class=&#34;hljs-number&#34;&gt;1&lt;/span&gt; 属性，&lt;br&gt;    列名&lt;span class=&#34;hljs-number&#34;&gt;2&lt;/span&gt; 属性，&lt;br&gt;    列名&lt;span class=&#34;hljs-number&#34;&gt;3&lt;/span&gt; 属性，&lt;br&gt;    );&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;img src=&#34;../images/image-20230331194238530.png&#34; alt=&#34;image-20230331194238530&#34;&gt;&lt;/p&gt;
+&lt;p&gt;给数据表 orders 中插入数据&lt;/p&gt;
+&lt;figure class=&#34;highlight sql&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;code class=&#34;hljs sql&#34;&gt;&lt;span class=&#34;hljs-keyword&#34;&gt;insert&lt;/span&gt; &lt;span class=&#34;hljs-keyword&#34;&gt;into&lt;/span&gt; 表名 &lt;span class=&#34;hljs-keyword&#34;&gt;values&lt;/span&gt; (列&lt;span class=&#34;hljs-number&#34;&gt;1&lt;/span&gt;具体值,列&lt;span class=&#34;hljs-number&#34;&gt;2&lt;/span&gt;具体值,列&lt;span class=&#34;hljs-number&#34;&gt;3&lt;/span&gt;具体值);&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;img src=&#34;../images/image-20230331194301524.png&#34; alt=&#34;image-20230331194301524&#34;&gt;&lt;/p&gt;
+&lt;p&gt;增加数据&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;../images/image-20230331194328751.png&#34; alt=&#34;image-20230331194328751&#34;&gt;&lt;/p&gt;
+&lt;p&gt;删除数据表中消费者为 “jark” 的数据&lt;/p&gt;
+&lt;figure class=&#34;highlight sql&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;code class=&#34;hljs sql&#34;&gt;&lt;span class=&#34;hljs-keyword&#34;&gt;delete&lt;/span&gt; &lt;span class=&#34;hljs-keyword&#34;&gt;from&lt;/span&gt; 表名 &lt;span class=&#34;hljs-keyword&#34;&gt;where&lt;/span&gt; 条件;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;img src=&#34;../images/image-20230331194355476.png&#34; alt=&#34;image-20230331194355476&#34;&gt;&lt;/p&gt;
+&lt;p&gt;修改表中数据，将客户为 “Polar” 的购买价格由 44.4 修改为 100&lt;/p&gt;
+&lt;figure class=&#34;highlight sql&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;code class=&#34;hljs sql&#34;&gt;&lt;span class=&#34;hljs-keyword&#34;&gt;update&lt;/span&gt; 表名 &lt;span class=&#34;hljs-keyword&#34;&gt;set&lt;/span&gt; 目标修改值 &lt;span class=&#34;hljs-keyword&#34;&gt;where&lt;/span&gt; 修改条件;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;img src=&#34;../images/image-20230331194416409.png&#34; alt=&#34;image-20230331194416409&#34;&gt;&lt;/p&gt;
+&lt;p&gt;查找购买价格小于 50 的客户名&lt;/p&gt;
+&lt;figure class=&#34;highlight sql&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;code class=&#34;hljs sql&#34;&gt;&lt;span class=&#34;hljs-keyword&#34;&gt;select&lt;/span&gt; 查询结果 &lt;span class=&#34;hljs-keyword&#34;&gt;from&lt;/span&gt; 表名 &lt;span class=&#34;hljs-keyword&#34;&gt;where&lt;/span&gt; 条件&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;&lt;img src=&#34;../images/image-20230331194433579.png&#34; alt=&#34;image-20230331194433579&#34;&gt;&lt;/p&gt;
+ ]]></description>
+        </item>
+    </channel>
+</rss>
