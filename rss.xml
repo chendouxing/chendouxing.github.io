@@ -10,10 +10,10 @@
         <category>计算机等级考试</category>
         <category>语言</category>
         <category>python</category>
-        <category>论文</category>
         <category>数学</category>
         <category>课堂学习</category>
         <category>考试</category>
+        <category>论文</category>
         <category>SQL</category>
         <item>
             <guid isPermalink="true">https://chendouxing.github.io/2023/03/31/python/</guid>
@@ -42,21 +42,21 @@
 &lt;p&gt;&lt;img src=&#34;/images/image-20230331194214204.png&#34; alt=&#34;image-20230331194214204&#34;&gt;&lt;/p&gt;
 &lt;p&gt;创建数据表 orders&lt;/p&gt;
 &lt;figure class=&#34;highlight sql&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;3&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;4&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;5&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;code class=&#34;hljs sql&#34;&gt;&lt;span class=&#34;hljs-keyword&#34;&gt;create&lt;/span&gt; &lt;span class=&#34;hljs-keyword&#34;&gt;table&lt;/span&gt; &lt;span class=&#34;hljs-string&#34;&gt;&amp;#x27;表名&amp;#x27;&lt;/span&gt;(&lt;br&gt;    列名&lt;span class=&#34;hljs-number&#34;&gt;1&lt;/span&gt; 属性，&lt;br&gt;    列名&lt;span class=&#34;hljs-number&#34;&gt;2&lt;/span&gt; 属性，&lt;br&gt;    列名&lt;span class=&#34;hljs-number&#34;&gt;3&lt;/span&gt; 属性，&lt;br&gt;    );&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;&lt;img src=&#34;../images/image-20230331194238530.png&#34; alt=&#34;image-20230331194238530&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/image-20230331194238530.png&#34; alt=&#34;image-20230331194238530&#34;&gt;&lt;/p&gt;
 &lt;p&gt;给数据表 orders 中插入数据&lt;/p&gt;
 &lt;figure class=&#34;highlight sql&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;code class=&#34;hljs sql&#34;&gt;&lt;span class=&#34;hljs-keyword&#34;&gt;insert&lt;/span&gt; &lt;span class=&#34;hljs-keyword&#34;&gt;into&lt;/span&gt; 表名 &lt;span class=&#34;hljs-keyword&#34;&gt;values&lt;/span&gt; (列&lt;span class=&#34;hljs-number&#34;&gt;1&lt;/span&gt;具体值,列&lt;span class=&#34;hljs-number&#34;&gt;2&lt;/span&gt;具体值,列&lt;span class=&#34;hljs-number&#34;&gt;3&lt;/span&gt;具体值);&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;&lt;img src=&#34;../images/image-20230331194301524.png&#34; alt=&#34;image-20230331194301524&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/image-20230331194301524.png&#34; alt=&#34;image-20230331194301524&#34;&gt;&lt;/p&gt;
 &lt;p&gt;增加数据&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;../images/image-20230331194328751.png&#34; alt=&#34;image-20230331194328751&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/image-20230331194328751.png&#34; alt=&#34;image-20230331194328751&#34;&gt;&lt;/p&gt;
 &lt;p&gt;删除数据表中消费者为 “jark” 的数据&lt;/p&gt;
 &lt;figure class=&#34;highlight sql&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;code class=&#34;hljs sql&#34;&gt;&lt;span class=&#34;hljs-keyword&#34;&gt;delete&lt;/span&gt; &lt;span class=&#34;hljs-keyword&#34;&gt;from&lt;/span&gt; 表名 &lt;span class=&#34;hljs-keyword&#34;&gt;where&lt;/span&gt; 条件;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;&lt;img src=&#34;../images/image-20230331194355476.png&#34; alt=&#34;image-20230331194355476&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/image-20230331194355476.png&#34; alt=&#34;image-20230331194355476&#34;&gt;&lt;/p&gt;
 &lt;p&gt;修改表中数据，将客户为 “Polar” 的购买价格由 44.4 修改为 100&lt;/p&gt;
 &lt;figure class=&#34;highlight sql&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;code class=&#34;hljs sql&#34;&gt;&lt;span class=&#34;hljs-keyword&#34;&gt;update&lt;/span&gt; 表名 &lt;span class=&#34;hljs-keyword&#34;&gt;set&lt;/span&gt; 目标修改值 &lt;span class=&#34;hljs-keyword&#34;&gt;where&lt;/span&gt; 修改条件;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;&lt;img src=&#34;../images/image-20230331194416409.png&#34; alt=&#34;image-20230331194416409&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/image-20230331194416409.png&#34; alt=&#34;image-20230331194416409&#34;&gt;&lt;/p&gt;
 &lt;p&gt;查找购买价格小于 50 的客户名&lt;/p&gt;
 &lt;figure class=&#34;highlight sql&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;code class=&#34;hljs sql&#34;&gt;&lt;span class=&#34;hljs-keyword&#34;&gt;select&lt;/span&gt; 查询结果 &lt;span class=&#34;hljs-keyword&#34;&gt;from&lt;/span&gt; 表名 &lt;span class=&#34;hljs-keyword&#34;&gt;where&lt;/span&gt; 条件&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
-&lt;p&gt;&lt;img src=&#34;../images/image-20230331194433579.png&#34; alt=&#34;image-20230331194433579&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/image-20230331194433579.png&#34; alt=&#34;image-20230331194433579&#34;&gt;&lt;/p&gt;
  ]]></description>
         </item>
         <item>
@@ -343,7 +343,7 @@ M834 80h400000v40h-400000z&#39;/&gt;&lt;/svg&gt;&lt;/span&gt;&lt;/span&gt;&lt;/s
 &lt;hr&gt;
 &lt;h3 id=&#34;napa-powering-scalable-data-warehousing-with-robust-query-performance-at-google&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#napa-powering-scalable-data-warehousing-with-robust-query-performance-at-google&#34;&gt;#&lt;/a&gt; 《Napa: powering scalable data warehousing with robust query performance at Google》&lt;/h3&gt;
 &lt;p&gt;Ankur 等学者（引文：Ankur Agiwal, Kevin Lai, Indrajit Roy,et al. 2021. Napa: powering scalable data warehousing with robust query performance at Google. Proc. VLDB Endow. 14, 12 (July 2021), 2986–2997.）由于 Google 服务不断生成大量数据，同时需要在可扩展性、亚秒级查询响应时间、可用性和强一致性的条件下存储和服务这些数据集的挑战下，开发部署了了一个分析数据管理系统 Napa。Napa 相比 Mesa，Napa 使用物化视图取代了 Mesa 繁琐的刷新技术来加速分析型查询；Napa 将数据新鲜度、成本和查询性能三者根据客户需求进行调整，使需求转换为内部数据库配置，并引入可查询时间戳（Queryable Timestamp，QT）。使用 QT 判断物化视图的延迟度，如图所示，&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;../images/image-20230306162011309-16800541710091.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/image-20230306162011309-16800541710091.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;QT 之前为可查询时间，QT 到 Now（）之间的内容无法查询，[Now（）-QT] 代表增量的数据新鲜度。如果 QT（table）= X，则客户端可以查询在时间 X 之前摄取到表中的所有数据，QT 充当屏障，在 X 之后接收的任何数据都对客户端查询隐藏。一旦在（Y-X）范围内接收的数据被优化以满足查询性能要求，QT 的值将从 X 前进到 Y。QT 在读时使用最小值作为读的时间点，数据库的 QT 是数据库所有表 QT 值的最小值。&lt;/p&gt;
 &lt;p&gt;例子：本地 QT 值为 100、90、83、75、64 的 5 个 Napa 副本，并且查询服务要求大多数副本可用，则跨所有站点的新 QT 被设置为 83，因为大多数副本至少到 83 为止是最新的。Napa 将使用 QT 至少为 83 的副本来回答查询，因为可以保证对这些副本的查询只需要读取本地可用的增量。&lt;/p&gt;
 &lt;p&gt;对于提高查询性能，Napa 通过三种技术实现：（1）通过更积极地使用视图，（2）通过改变存储策略，Napa 在存储层提前合并增量，减少查询时增量的数量，并因此减少尾部等待时间，（3）通过解耦摄取、视图维护和查询执行。数据操作在数据中心的每个副本异步执行，而元数据操作定期执行，确保副本之间的数据可用性。Napa 直接使用 F1 作为执行引擎。&lt;/p&gt;
@@ -356,7 +356,7 @@ M834 80h400000v40h-400000z&#39;/&gt;&lt;/svg&gt;&lt;/span&gt;&lt;/span&gt;&lt;/s
 &lt;p&gt;任务表：存储和删除维护任务，仅用于恢复，不做正常处理。&lt;/p&gt;
 &lt;p&gt;维护任务：由需要维护的视图信息、更新的基表信息、事务序列号、语句序列号、原始事务提交序列号和任务当前状态组成。事务序列号和语句序列号用于惰性维护时定位增量行和基表版本，原始事务提交序列号确定任务维护顺序，任务当前状态用于维护管理器计划和跟踪任务。&lt;/p&gt;
 &lt;p&gt;当查询开始之前，管理器检查计划使用的视图是否有挂起的维护任务（确保需要使用的视图都是最新的），若存在维护任务，管理器将立即执行这些任务，同时基表上所有的索引立即更新，任务完成后，查询继续执行。如果挂起的维护任务不影响查询访问的视图，则该视图不必立即更新。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;../images/image-20230306162430648-16800542101424.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/image-20230306162430648-16800542101424.png&#34; alt=&#34;&#34;&gt;&lt;/p&gt;
 &lt;p&gt;图为惰性维护和紧急维护在响应时间上的比较。&lt;/p&gt;
 &lt;p&gt;a、基表更新便立即更新视图，当查询到达时，更新已经全部完成，视图内容为最新的，此时，查询立即完成；&lt;/p&gt;
 &lt;p&gt;b（1）、基表三次更新 T1、T2、T3 完成后，维护管理器等待系统空闲时，创建低优先级作业完成维护任务，查询到达时，视图是最新的，查询快速完成，查询响应时间与 a 相同；&lt;/p&gt;
@@ -376,7 +376,7 @@ M834 80h400000v40h-400000z&#39;/&gt;&lt;/svg&gt;&lt;/span&gt;&lt;/span&gt;&lt;/s
 &lt;p&gt;1. 对于第一个问题，现代操作系统普遍使用事件驱动 (Event-Driven) 模型来处理。通过使用消息本身携带的生成时间 (Event-Time) 而不是系统接收到消息的时间 (Processing Time) 来进行处理。这样的系统当中，时钟是由事件来驱动的。 没有新的事件到来，系统的状态就如同冻结起来了一样。&lt;/p&gt;
 &lt;p&gt;** 激发器 (Trigger)** 是一类特别的事件，当这种事件的消息被接收到时，某些任务会被激发和执行。&lt;/p&gt;
 &lt;p&gt;** 水印 (Watermark)** 简单来说，就是根据消息的事件时间来决定一条消息应该被处理还是被丢弃的标记。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;../images/v2-461d11fa37482e48a8bde66a0b91cf2c_r.jpg&#34; alt=&#34;v2-461d11fa37482e48a8bde66a0b91cf2c_r&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/v2-461d11fa37482e48a8bde66a0b91cf2c_r.jpg&#34; alt=&#34;v2-461d11fa37482e48a8bde66a0b91cf2c_r&#34;&gt;&lt;/p&gt;
 &lt;p&gt;上图中，从右到左是消息到达的时间，在某时刻，消息 8 通过激发器激发了一次对水印的修改。此时水印的时间限制被修改为 4 。 这意味着之后到达的标号时间小于 4 的消息都会被丢弃。在消息 8 之后到达的消息 7 和 5，虽然时间戳比消息 8 要早， 但是因为仍在 Watermark 的范围里，因此会被考虑在内。最后到达的消息有时间标号 9，他是一条当前观察到过的消息之后的消息， 因此也会被处理。&lt;/p&gt;
 &lt;p&gt;水印的规则：&lt;/p&gt;
 &lt;ol&gt;
@@ -391,7 +391,7 @@ M834 80h400000v40h-400000z&#39;/&gt;&lt;/svg&gt;&lt;/span&gt;&lt;/span&gt;&lt;/s
 &lt;li&gt;滑动窗口 (Sliding Window)：长度固定，但每个窗口的开始时间相比于前一个窗口都有一个固定的时间偏移；&lt;/li&gt;
 &lt;li&gt;会话窗口 (Session Window)：使用事件的属性和相互的时间间隔把他们组织在一个窗口里。这些窗口的开始时间、 持续长度等都会变化。这类窗口用于用户追踪、线索跟踪等场景十分有效。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;img src=&#34;../images/v2-35d35ee365a77543cc91532e223d5632_r.jpg&#34; alt=&#34;v2-35d35ee365a77543cc91532e223d5632_r&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/v2-35d35ee365a77543cc91532e223d5632_r.jpg&#34; alt=&#34;v2-35d35ee365a77543cc91532e223d5632_r&#34;&gt;&lt;/p&gt;
 &lt;p&gt;** 窗口和水印是两个不同的概念。** 一个窗口的结束时间已经过去， 并不意味着这个窗口不能再接收迟到的落入这个窗口的消息。实际上，这个窗口的内部状态可以被一直保存， 以便于在接收到新的消息之后刷新窗口内容并输出增量表。一个窗口及其内部状态将只会在水印完全通过之后被回收。 事实上，一个窗口的打开和关闭都有赖于激发器的作用。&lt;/p&gt;
 &lt;p&gt;** 句点 (Punctation)** 是一些在窗口关闭之前激发的激发器，它使得窗口可以输出它的中间结果而不必等到整个窗口的消息都处理完成。这对于提供低延迟数据传达十分有用。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;Stream Join 的语义&lt;/strong&gt;&lt;/p&gt;
@@ -404,7 +404,7 @@ M834 80h400000v40h-400000z&#39;/&gt;&lt;/svg&gt;&lt;/span&gt;&lt;/span&gt;&lt;/s
 &lt;p&gt;&lt;strong&gt;动态表与 Stream Join&lt;/strong&gt; 则是通过将动态表处理成类似 MVCC 并发控制那样的形式， 因此在每一个来自于 Stream 的消息需要 Join 时，只需要查询对应&lt;strong&gt;事件时间&lt;/strong&gt;下动态表的快照即可。&lt;/p&gt;
 &lt;p&gt;在 Stream Join 动态表这个模型中，动态表这端虽然可能也是由 Stream 而来，但是对动态表的插入和修改操作 (也表示称 Stream 消息) 并不会激发 Join 结果的刷新。 这些消息只是被加入到内部状态中，等待 Stream 里的消息激发刷新时查询。 这是动态表 Join Stream 与 Stream Join Stream 最大的区别。&lt;/p&gt;
 &lt;p&gt;Stream 与 Stream Join 在两边有消息来的时候都有可能激发大量查询和修改操作，因此面临着严峻的查询放大放大和修改放大问题。在流式处理系统中，一种解决方法是结合窗口语义实现局部的 Join，下图描述了不同窗口下 Join 的语义。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;../images/v2-dac4bd8ff5613358f3fcd04a231c8b31_r.jpg&#34; alt=&#34;v2-dac4bd8ff5613358f3fcd04a231c8b31_r&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/v2-dac4bd8ff5613358f3fcd04a231c8b31_r.jpg&#34; alt=&#34;v2-dac4bd8ff5613358f3fcd04a231c8b31_r&#34;&gt;&lt;/p&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;watermarks-in-stream-processing-systems-semantics-and-comparative-analysis-of-apache-flink-and-google-cloud-dataflow&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#watermarks-in-stream-processing-systems-semantics-and-comparative-analysis-of-apache-flink-and-google-cloud-dataflow&#34;&gt;#&lt;/a&gt; 《Watermarks in Stream Processing Systems: Semantics and Comparative Analysis of Apache Flink and Google Cloud Dataflow 》&lt;/h3&gt;
 &lt;p&gt;&lt;strong&gt;准备就绪&lt;/strong&gt;：对于流处理，准备就绪是指具有可用于产生某个输出的所有必要输入的状态。&lt;/p&gt;
@@ -429,7 +429,7 @@ M834 80h400000v40h-400000z&#39;/&gt;&lt;/svg&gt;&lt;/span&gt;&lt;/span&gt;&lt;/s
 &lt;h3 id=&#34;pgce-a-distributed-storage-causal-consistency-model-based-on-partial-geo-replication-and-cloud-edge-collaboration-architecture&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#pgce-a-distributed-storage-causal-consistency-model-based-on-partial-geo-replication-and-cloud-edge-collaboration-architecture&#34;&gt;#&lt;/a&gt; 《PGCE: A distributed storage causal consistency model based on partial geo-replication and cloud-edge collaboration architecture 》&lt;/h3&gt;
 &lt;p&gt;目前的因果一致性模型难以应对云存储系统中的高同步开销和响应延迟。提出了一种基于部分地理复制和云边缘协作结构的分布式存储因果一致性模型。该模型基于 Cloud-Edge 协作的分布式网络架构，通过哈希函数将云数据集划分为多个子集，并将这些子集存储在靠近用户网络的边缘节点上，实现局部异地复制。同时，通过建立时间戳稳定机制和元数据处理服务，在保证因果关系的前提下实现节点间的数据一致性，降低了元数据处理和数据同步的开销。客户端直接与边缘节点交互，减少了与云 DC 交互的响应延迟。与现有模型相比，PGCE 在响应延迟和吞吐量方面具有更好的性能。&lt;/p&gt;
 &lt;p&gt;PGCE 的云端可以与已有的因果一致性模式相结合，边缘端的每个节点存储云数据集的一个子集，实现部分地理复制。通过使用副本数据定位矩阵，数据更新仅传播到存储相同数据的节点，从而减少了元数据处理和数据同步开销。客户端的数据请求可以在边缘节点得到及时的处理和响应，减少了直接与云 DC 进行数据交互所带来的延迟。同时，将稳定状态下的数据定期传输到云端进行全局数据的更新和同步。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;../images/image-20230310191238109-168005432929913.png&#34; alt=&#34;image-20230310191238109&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/image-20230310191238109-168005432929913.png&#34; alt=&#34;image-20230310191238109&#34;&gt;&lt;/p&gt;
 &lt;p&gt;图为 PGCE 基于云边缘协作存储架构设计。Cloud 存储客户端写入的所有数据，Edge 由大量靠近用户网络的边缘节点组成，采用部分复制策略存储云数据集的子集，根据节点或 DC 间的存储关系构建点对点 FIFO 数据同步链路。同时，在边缘端设置时间戳稳定机制和元数据处理节点，为客户端提供因果一致的数据存储和查询服务。客户端由许多终端用户组成，可以通过 Migrate 操作（当我们读取的键没有存储在本地节点上时：首先，利用 Hash 函数找到与关键字对应的目标分区。其次，通过矩阵存储关系找到目标分区所在的节点，执行客户端迁移连接到目标节点，实现对非本地节点的数据阅读。）连接到其他边缘节点上，访问本地节点上没有存储的数据。&lt;/p&gt;
 &lt;p&gt;PGCE 建立了时间戳稳定机制和 Saturn 元数据服务来跟踪因果一致性。在每个 Edge-side 中设置一个 Saturn 节点（元数据处理服务器）。Saturn 节点接收所有需要更新或写入的元数据，并调用 Saturn 接口服务来执行全局因果关系排序，代替在每个边缘节点执行的依赖性检查工作，并以较低的开销确保 PGCE 的因果关系一致性。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;../images/image-20230310192903417-168005435460916.png&#34; alt=&#34;image-20230310192903417&#34;&gt;&lt;/p&gt;
