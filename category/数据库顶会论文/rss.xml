@@ -8,14 +8,14 @@
         <pubDate>Tue, 28 Mar 2023 18:51:10 +0800</pubDate>
         <lastBuildDate>Tue, 28 Mar 2023 18:51:10 +0800</lastBuildDate>
         <category>语言</category>
-        <category>python</category>
         <category>SQL</category>
-        <category>数据库</category>
-        <category>数据立方体</category>
+        <category>python</category>
         <category>数学</category>
         <category>课堂学习</category>
-        <category>考试</category>
+        <category>数据库</category>
+        <category>数据立方体</category>
         <category>计算机等级考试</category>
+        <category>考试</category>
         <category>论文</category>
         <item>
             <guid isPermalink="true">https://chendouxing.github.io/2023/03/28/%E8%AE%BA%E6%96%87/</guid>
@@ -146,7 +146,7 @@
 &lt;p&gt;有损压缩，与无损压缩不同。有损压缩通过丢弃不必要的信息（例如截断测量值的最低有效位或对图像进行二次采样）来减小数据大小。由于信息的丢失，该过程是不可逆的。虽然一些用例需要输入的完美可恢复性（例如，银行交易），DeepSqueeze 工作集中在通常可以容忍不同程度的丢失的数据存档场景。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;DeepSqeeze 是第一个将自动编码器应用于表格数据的语义压缩方法&lt;/strong&gt;。重要的是，DeepSqeeze 可以捕获分类列和数值列之间的复杂关系，并且我们通过用户指定的错误阈值将数值的损失纳入模型中。DeepSqeeze 使用自动编码器将元组映射到低维空间，允许对许多列之间的复杂关系进行建模。&lt;/p&gt;
 &lt;h4 id=&#34;deepsqeeze的压缩过程&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#deepsqeeze的压缩过程&#34;&gt;#&lt;/a&gt; DeepSqeeze 的压缩过程&lt;/h4&gt;
-&lt;p&gt;&lt;img src=&#34;../images/image-20230403183001601.png&#34; alt=&#34;image-20230403183001601&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/image-20230403183001601.png&#34; alt=&#34;image-20230403183001601&#34;&gt;&lt;/p&gt;
 &lt;h5 id=&#34;预处理&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#预处理&#34;&gt;#&lt;/a&gt; 预处理&lt;/h5&gt;
 &lt;p&gt;作为输入，DeepSqeeze 接受一个表格数据集，该数据集由分类列和数值列的任意组合以及指定列类型的元数据组成。&lt;/p&gt;
 &lt;p&gt;预处理将此输入数据预处理为模型可以操作的格式。根据数据类型，应用各种转换（例如，字典编码），以及遵守数值列的指定误差阈值的量化版本。&lt;/p&gt;
@@ -162,11 +162,11 @@
 &lt;h5 id=&#34;模型构建&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#模型构建&#34;&gt;#&lt;/a&gt; 模型构建&lt;/h5&gt;
 &lt;p&gt;构建一个自动编码器的人工神经网络，它将预处理的输入数据映射到低维表示。自动编码器类似于其他降维技术，但它们能够同时跨多个列学习复杂的关系。无监督训练过程在数据集上迭代进行，直到收敛。重要的是，与传统的机器学习设置不同，我们的&lt;strong&gt;目标是将模型过拟合到输入数据，以最小化压缩输出的大小&lt;/strong&gt;。将模型过拟合到训练数据的一种方式是创建能够捕获数据集中的所有关系的复杂模型，而替代方法涉及构建多个更简单的模型，称为&lt;strong&gt;专家混合&lt;/strong&gt;，其专门用于包含相似元组的数据的某些分区。图中显示了三个专门的模型，元组通过一个阀门路由到模型，该模型在训练期间学习数据的最佳划分。&lt;/p&gt;
 &lt;p&gt;下图描绘了用于压缩具有一个分类（C）列和三个数值（N）列的数据集的示例自动编码器。如图所示，自动编码器由两个几乎对称的模型组成：（1）编码器，其将输入元组映射到低维空间；以及（2）试图重构输入元组的解码器。共享中间层表示每个元组的学习表示（代码）。DeepSqeeze 总是用比原始输入元组更小的表示层来构造自动编码器，这是将数据映射到低维空间的瓶颈。DeepSqeeze 存储这些代码，并在解压缩期间使用解码器重新创建元组。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;../images/image-20230403200107007.png&#34; alt=&#34;image-20230403200107007&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/image-20230403200107007.png&#34; alt=&#34;image-20230403200107007&#34;&gt;&lt;/p&gt;
 &lt;p&gt;为了处理现实世界数据集中经常出现的混合分类列和数值列，DeepSqeeze 需要基于列类型信息动态调整基本自动编码器架构。图中的数值列在输出层中只需要一个节点，而分类列则需要为每个不同的值指定一个节点。在上一个示例中，具有可能值 {A，B，C，D} 的分类列需要四个输出节点（图中的蓝色）。&lt;/p&gt;
 &lt;p&gt;与集成分类列相关的关键问题之一是在最终完全连接层中引入大量连接所导致的模型大小的潜在爆炸。为了解决这个问题，使用&lt;strong&gt;参数共享技术&lt;/strong&gt;，涉及所有分类列的共享输出层，而不是每列每个不同值的单个节点。&lt;strong&gt;共享输出层的大小由任何分类列中不同值的最大数目来限定&lt;/strong&gt;。同时，还必须在输出层之前添加一个辅助层，每个分类列有一个节点，以及一个额外的信号节点。信号节点简单地为每个分类列提供索引，通知共享层如何解释来自特定输出的辅助层的值。&lt;/p&gt;
 &lt;p&gt;下图描述数据集解码器的最后两层，该数据集具有三个分类列，分别用于传统架构（左）和参数共享版本（右）。每列都有不同数量的不同值，这些值是用颜色编码的。由于数据集有三列，我们的辅助层包含三个节点加上一个信号节点 s。共享输出层有五个节点，这是所有列中不同值的最大数量。如图所示，辅助层显著减小了完全连接层的尺寸。&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;../images/image-20230403201110277.png&#34; alt=&#34;image-20230403201110277&#34;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/image-20230403201110277.png&#34; alt=&#34;image-20230403201110277&#34;&gt;&lt;/p&gt;
 &lt;p&gt;&lt;u&gt;专家混合&lt;/u&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;构建几个较小且不太复杂的模型来处理不相交的数据子集&lt;/strong&gt;。这种方法是，每个较小的模型可以学习一组有限的简单映射。&lt;/p&gt;
 &lt;p&gt;本文使用了一个稀疏门控的专家混合体，它学习如何以无监督的方式而不是传统的聚类算法来最好地划分数据集。该体系结构的核心是一个门，它是一个独立的模型，将元组分配给最适合的专家（即，对于每个元组具有最高精度的模型）。因此，门需要每个专家一个输出。&lt;/p&gt;
