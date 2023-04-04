@@ -1,0 +1,19 @@
+{
+    "version": "https://jsonfeed.org/version/1",
+    "title": "蟹堡王海星 • All posts by \"数据立方体·\" category",
+    "description": "花有重开日，人无再少年",
+    "home_page_url": "https://chendouxing.github.io",
+    "items": [
+        {
+            "id": "https://chendouxing.github.io/2023/04/03/%E6%95%B0%E6%8D%AE%E7%AB%8B%E6%96%B9%E4%BD%93/",
+            "url": "https://chendouxing.github.io/2023/04/03/%E6%95%B0%E6%8D%AE%E7%AB%8B%E6%96%B9%E4%BD%93/",
+            "title": "数据立方体",
+            "date_published": "2023-04-03T13:49:27.000Z",
+            "content_html": "<link rel=\"stylesheet\" class=\"aplayer-secondary-style-marker\" href=\"\\assets\\css\\APlayer.min.css\"><script src=\"\\assets\\js\\APlayer.min.js\" class=\"aplayer-secondary-script-marker\"></script><h1 id=\"数据立方体\"><a class=\"markdownIt-Anchor\" href=\"#数据立方体\">#</a> 数据立方体</h1>\n",
+            "tags": [
+                "数据库",
+                "数据立方体"
+            ]
+        }
+    ]
+}

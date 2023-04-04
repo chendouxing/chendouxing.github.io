@@ -7,14 +7,16 @@
         <language>zh-CN</language>
         <pubDate>Wed, 29 Mar 2023 20:10:42 +0800</pubDate>
         <lastBuildDate>Wed, 29 Mar 2023 20:10:42 +0800</lastBuildDate>
-        <category>计算机等级考试</category>
-        <category>论文</category>
         <category>语言</category>
-        <category>SQL</category>
         <category>python</category>
+        <category>SQL</category>
+        <category>数据库</category>
+        <category>数据立方体</category>
         <category>数学</category>
         <category>课堂学习</category>
         <category>考试</category>
+        <category>计算机等级考试</category>
+        <category>论文</category>
         <item>
             <guid isPermalink="true">https://chendouxing.github.io/2023/03/29/%E8%BD%AF%E8%80%83/</guid>
             <title>软考</title>
@@ -25,9 +27,9 @@
  ]]></description>
         </item>
         <item>
-            <guid isPermalink="true">https://chendouxing.github.io/2023/03/29/computertest/</guid>
+            <guid isPermalink="true">https://chendouxing.github.io/2023/03/29/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%89%E7%BA%A7%E8%80%83%E8%AF%95/</guid>
             <title>计算机三级填空题</title>
-            <link>https://chendouxing.github.io/2023/03/29/computertest/</link>
+            <link>https://chendouxing.github.io/2023/03/29/%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%89%E7%BA%A7%E8%80%83%E8%AF%95/</link>
             <category>计算机等级考试</category>
             <pubDate>Wed, 29 Mar 2023 09:48:10 +0800</pubDate>
             <description><![CDATA[ &lt;link rel=&#34;stylesheet&#34; class=&#34;aplayer-secondary-style-marker&#34; href=&#34;\assets\css\APlayer.min.css&#34;&gt;&lt;script src=&#34;\assets\js\APlayer.min.js&#34; class=&#34;aplayer-secondary-script-marker&#34;&gt;&lt;/script&gt;&lt;p&gt;IDEFO 需求建模方法由箭头和 31 矩形框两种元素构成。&lt;/p&gt;
