@@ -9,7 +9,7 @@
             "url": "https://chendouxing.github.io/2023/04/03/%E6%95%B0%E6%8D%AE%E7%AB%8B%E6%96%B9%E4%BD%93/",
             "title": "数据立方体",
             "date_published": "2023-04-03T13:49:27.000Z",
-            "content_html": "<link rel=\"stylesheet\" class=\"aplayer-secondary-style-marker\" href=\"\\assets\\css\\APlayer.min.css\"><script src=\"\\assets\\js\\APlayer.min.js\" class=\"aplayer-secondary-script-marker\"></script><h1 id=\"数据立方体\"><a class=\"markdownIt-Anchor\" href=\"#数据立方体\">#</a> 数据立方体</h1>\n",
+            "content_html": "<link rel=\"stylesheet\" class=\"aplayer-secondary-style-marker\" href=\"\\assets\\css\\APlayer.min.css\"><script src=\"\\assets\\js\\APlayer.min.js\" class=\"aplayer-secondary-script-marker\"></script><h1 id=\"数据立方体\"><a class=\"markdownIt-Anchor\" href=\"#数据立方体\">#</a> 数据立方体</h1>\n<p>冰山立方体，其根据最小支持度阈值来对数据立方体单元的一部分进行物化，不仅能够节省处理时间和磁盘空间，而且还能够实现更加聚集的分析。</p>\n",
             "tags": [
                 "数据库",
                 "数据立方体"

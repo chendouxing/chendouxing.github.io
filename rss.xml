@@ -10,13 +10,13 @@
         <category>语言</category>
         <category>python</category>
         <category>SQL</category>
-        <category>计算机等级考试</category>
-        <category>论文</category>
-        <category>数据库</category>
-        <category>数据立方体</category>
         <category>数学</category>
         <category>课堂学习</category>
+        <category>数据库</category>
+        <category>数据立方体</category>
         <category>考试</category>
+        <category>计算机等级考试</category>
+        <category>论文</category>
         <item>
             <guid isPermalink="true">https://chendouxing.github.io/2023/04/03/%E6%95%B0%E6%8D%AE%E7%AB%8B%E6%96%B9%E4%BD%93/</guid>
             <title>数据立方体</title>
@@ -25,6 +25,7 @@
             <category>数据立方体</category>
             <pubDate>Mon, 03 Apr 2023 21:49:27 +0800</pubDate>
             <description><![CDATA[ &lt;link rel=&#34;stylesheet&#34; class=&#34;aplayer-secondary-style-marker&#34; href=&#34;\assets\css\APlayer.min.css&#34;&gt;&lt;script src=&#34;\assets\js\APlayer.min.js&#34; class=&#34;aplayer-secondary-script-marker&#34;&gt;&lt;/script&gt;&lt;h1 id=&#34;数据立方体&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#数据立方体&#34;&gt;#&lt;/a&gt; 数据立方体&lt;/h1&gt;
+&lt;p&gt;冰山立方体，其根据最小支持度阈值来对数据立方体单元的一部分进行物化，不仅能够节省处理时间和磁盘空间，而且还能够实现更加聚集的分析。&lt;/p&gt;
  ]]></description>
         </item>
         <item>
@@ -209,7 +210,8 @@ M834 80h400000v40h-400000z&#39;/&gt;&lt;/svg&gt;&lt;/span&gt;&lt;/span&gt;&lt;/s
             <link>https://chendouxing.github.io/2023/03/29/%E8%BD%AF%E8%80%83/</link>
             <category>考试</category>
             <pubDate>Wed, 29 Mar 2023 20:10:42 +0800</pubDate>
-            <description><![CDATA[ &lt;link rel=&#34;stylesheet&#34; class=&#34;aplayer-secondary-style-marker&#34; href=&#34;\assets\css\APlayer.min.css&#34;&gt;&lt;script src=&#34;\assets\js\APlayer.min.js&#34; class=&#34;aplayer-secondary-script-marker&#34;&gt;&lt;/script&gt;&lt;h1 id=&#34;软考&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#软考&#34;&gt;#&lt;/a&gt; 软考&lt;/h1&gt;
+            <description><![CDATA[ &lt;link rel=&#34;stylesheet&#34; class=&#34;aplayer-secondary-style-marker&#34; href=&#34;\assets\css\APlayer.min.css&#34;&gt;&lt;script src=&#34;\assets\js\APlayer.min.js&#34; class=&#34;aplayer-secondary-script-marker&#34;&gt;&lt;/script&gt;&lt;h1 id=&#34;综合知识&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#综合知识&#34;&gt;#&lt;/a&gt; 综合知识&lt;/h1&gt;
+&lt;h2 id=&#34;2009上&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#2009上&#34;&gt;#&lt;/a&gt; 2009 上&lt;/h2&gt;
  ]]></description>
         </item>
         <item>
