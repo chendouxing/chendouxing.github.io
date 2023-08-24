@@ -20,6 +20,44 @@
             <category>计算机等级考试</category>
             <pubDate>Thu, 24 Aug 2023 14:39:06 +0800</pubDate>
             <description><![CDATA[ &lt;link rel=&#34;stylesheet&#34; class=&#34;aplayer-secondary-style-marker&#34; href=&#34;\assets\css\APlayer.min.css&#34;&gt;&lt;script src=&#34;\assets\js\APlayer.min.js&#34; class=&#34;aplayer-secondary-script-marker&#34;&gt;&lt;/script&gt;&lt;h1 id=&#34;数据库原理&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#数据库原理&#34;&gt;#&lt;/a&gt; 数据库原理&lt;/h1&gt;
+&lt;p&gt;分布式透明性（网络透明性）包含位置透明性和命名透明性；复制透明性使用户不知道副本的存在&lt;/p&gt;
+&lt;p&gt;两阶段封锁协议保证可串行性&lt;/p&gt;
+&lt;p&gt;保证事务原子性是 DBMS 的事务管理器中故障恢复机制的责任；保证事务的一致性是对该事务进行编码的应用程序员的责任；保证事务的隔离性是 DBMS 的事务管理器中并发控制部件的责任；保证事务的持久性是 DBMS 的事务管理器中故障恢复机制的责任。&lt;/p&gt;
+&lt;p&gt;在分布式提交中，当一个事务更新在多个站点上的数据时，直到它确认每个站点上的事务都有结果且没有丢失时才能够提交。每个站点首先将事务执行的局部结果&lt;strong&gt;永久&lt;/strong&gt;记录在本地站点磁盘的日志上。&lt;/p&gt;
+&lt;p&gt;分布式系统的所有问题是&lt;strong&gt;内部的、实现级别的&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;分布式数据库系统中的&lt;strong&gt;数据分片&lt;/strong&gt;是指&lt;strong&gt;对全局关系的分片&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;可重构性：必须保证能够由一个全局关系的各个片段来重构该全局关系&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;HTTP 协议的效率低&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;分布式计算系统不可能同时满足 CAP 原理（一致性，可用性和分区容忍性）&lt;/p&gt;
+&lt;p&gt;ODMG 中对象可以用五个方面来描述：标识符、名称、生存期、结构和创建&lt;/p&gt;
+&lt;p&gt;对象定义语言 ODL&lt;strong&gt; 独立于&lt;/strong&gt;任何特定的编程语言（“ODL 是与 C++ 或 JAVA 等类似的一种编程语言” 该说法是错误的&lt;/p&gt;
+&lt;p&gt;基本可用是指分布式系统在出现不可预知的故障时，允许损失部分可用性，但不等价于可用性不可用&lt;/p&gt;
+&lt;p&gt;在主站点技术中，所有的识别副本&lt;strong&gt;都被保留&lt;/strong&gt;在相同的站点上；所有的加锁和解锁请求&lt;strong&gt;都被传输&lt;/strong&gt;在包含那个副本的站点上。&lt;/p&gt;
+&lt;p&gt;分布式数据库系统的查询处理比集中式系统&lt;strong&gt;更复杂&lt;/strong&gt;，分布式数据查询&lt;strong&gt;以减少传输的数据量为优化目标&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;半连接操作不能交换&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;基于识别数据项副本的方法常用于&lt;strong&gt;分布式并发控制&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;NOSQL 的复制模型主要有主 - 从复制和主 - 主复制。主从复制模型需要一 个复制为主复制，&lt;strong&gt;所有的读和写操作都必须是对主复制的&lt;/strong&gt;，然后再复制到其他的从节点。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;一个典型的对象 - 关系数据库中的表不满足第一范式的要求&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;三层 B/S 体系结构分别为表示层、应用层和数据库服务器层。应用层也称为业务逻辑层。&lt;strong&gt;当使用 Web 界面时，表示层一般通过 HTTP 协议 与应用层进行通信&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;典型的大对象（&lt;strong&gt;位图图像和长文本串&lt;/strong&gt;）&lt;strong&gt;被称为二级制大对象 BLOB&lt;/strong&gt;，一般是非结构化的。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;双钥加密体制中的加密秘钥和解密秘钥是不相同的&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;DBMS 不能直接处理基于非结构复杂对象的值的选择条件及其他操作。&lt;/p&gt;
+&lt;p&gt;很多 NOSQL 系统不支持 Join（连接）操作，Join 操作需要在应用程序中实现。&lt;/p&gt;
+&lt;p&gt;基于关系数据库系统的、以数据处理为主的传统的数据库应用具有以下共同特点：结构统一，面向记录，数据项小和原子字段。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;三种最基本的构造器是：原子、结构或元组、以及汇集。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;数据加密标准&lt;strong&gt; DES&lt;/strong&gt; 的密钥长度是&lt;strong&gt; 56&lt;/strong&gt; 位数字，数据高级加密标准&lt;strong&gt; AES&lt;/strong&gt; 的密钥长度可以是&lt;strong&gt; 128、192 或 256&lt;/strong&gt; 位数字。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;BASE 指的是基本可用、软状态和最终一致性&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;很多 NOSQL 系统采用的是&lt;strong&gt;对对象的主码进行哈希或范围分区方法来提高访问数据的性能&lt;/strong&gt;，NoSQL&lt;strong&gt; 支持无模式结构数据的存储和访问&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;投票方法在站点间产生的信息通信量比识别副本方法产生的要高&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;以应用服务器为中心的软件结构是 Web 服务器和三层客户机服务器结合的成果。&lt;strong&gt;这种软件结构可分为四部分：客户机浏览器、Web 服务器、应用服务器、数据库服务器&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;两阶段提交协议常用于处理分布式提交问题&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;常用的 B /S 结构软件开发模式:&lt;strong&gt; 以 Web 服务器为中心&lt;/strong&gt;，&lt;strong&gt;以数据库服务器为中心&lt;/strong&gt;和&lt;strong&gt;以应用服务器为中心&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;星形性质：安全级别高的主体禁止写安全级别低的客体&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;列存储数据库是按列存储数据&lt;/strong&gt;的，这类系统按列将一张表分为列族 (一种&lt;strong&gt;垂直分片方法&lt;/strong&gt;) , 每个列族存储在自己的文件中。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;在投票方法中，不需要指定识别副本&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;主站点技术是一种识别数据项副本的并发控制方法；主站点技术中所有的识别副本都保留在同一站点上，&lt;strong&gt;尽管所有的锁都在主站点上存取，但数据项本身可以在它们所在的任何站点上存取&lt;/strong&gt;，主站点技术的好处是它是集中式方案的简单扩展，因此不太复杂。&lt;/p&gt;
+&lt;p&gt;关联规则，指的是同时满足最小支持度阈值和最小可信度阈值的规则。关联规则挖掘的总体性能由从项集中找出频繁项集的过程决定，常用的关联规则挖掘算法有 Aprior 算法、采样算法、分区算法等。&lt;strong&gt;一个频繁项集的超集可以是频繁项集，也可以不是&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;大多数的 WEB 产品都是通过牺牲一致性来换取高可用性&lt;/strong&gt;。&lt;/p&gt;
 &lt;h1 id=&#34;操作系统原理&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#操作系统原理&#34;&gt;#&lt;/a&gt; 操作系统原理&lt;/h1&gt;
  ]]></description>
         </item>
