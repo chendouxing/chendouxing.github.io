@@ -5,6 +5,16 @@
     "home_page_url": "https://chendouxing.github.io",
     "items": [
         {
+            "id": "https://chendouxing.github.io/2023/08/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%9B%E7%BA%A7/",
+            "url": "https://chendouxing.github.io/2023/08/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%9B%E7%BA%A7/",
+            "title": "计算机四级考试",
+            "date_published": "2023-08-24T06:39:06.000Z",
+            "content_html": "<link rel=\"stylesheet\" class=\"aplayer-secondary-style-marker\" href=\"\\assets\\css\\APlayer.min.css\"><script src=\"\\assets\\js\\APlayer.min.js\" class=\"aplayer-secondary-script-marker\"></script><h1 id=\"数据库原理\"><a class=\"markdownIt-Anchor\" href=\"#数据库原理\">#</a> 数据库原理</h1>\n<h1 id=\"操作系统原理\"><a class=\"markdownIt-Anchor\" href=\"#操作系统原理\">#</a> 操作系统原理</h1>\n",
+            "tags": [
+                "计算机等级考试"
+            ]
+        },
+        {
             "id": "https://chendouxing.github.io/2023/04/03/%E6%95%B0%E6%8D%AE%E7%AB%8B%E6%96%B9%E4%BD%93/",
             "url": "https://chendouxing.github.io/2023/04/03/%E6%95%B0%E6%8D%AE%E7%AB%8B%E6%96%B9%E4%BD%93/",
             "title": "数据立方体",
@@ -13,17 +23,6 @@
             "tags": [
                 "数据库",
                 "数据立方体"
-            ]
-        },
-        {
-            "id": "https://chendouxing.github.io/2023/03/31/python/",
-            "url": "https://chendouxing.github.io/2023/03/31/python/",
-            "title": "python",
-            "date_published": "2023-03-31T09:43:48.000Z",
-            "content_html": "<link rel=\"stylesheet\" class=\"aplayer-secondary-style-marker\" href=\"\\assets\\css\\APlayer.min.css\"><script src=\"\\assets\\js\\APlayer.min.js\" class=\"aplayer-secondary-script-marker\"></script><h1 id=\"python\"><a class=\"markdownIt-Anchor\" href=\"#python\">#</a> python</h1>\n",
-            "tags": [
-                "语言",
-                "python"
             ]
         },
         {

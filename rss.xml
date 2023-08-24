@@ -5,18 +5,27 @@
         <link>https://chendouxing.github.io</link>
         <description>花有重开日，人无再少年</description>
         <language>zh-CN</language>
-        <pubDate>Mon, 03 Apr 2023 21:49:27 +0800</pubDate>
-        <lastBuildDate>Mon, 03 Apr 2023 21:49:27 +0800</lastBuildDate>
+        <pubDate>Thu, 24 Aug 2023 14:39:06 +0800</pubDate>
+        <lastBuildDate>Thu, 24 Aug 2023 14:39:06 +0800</lastBuildDate>
         <category>语言</category>
-        <category>python</category>
         <category>SQL</category>
         <category>数学</category>
         <category>课堂学习</category>
         <category>数据库</category>
         <category>数据立方体</category>
-        <category>考试</category>
         <category>计算机等级考试</category>
+        <category>考试</category>
         <category>论文</category>
+        <item>
+            <guid isPermalink="true">https://chendouxing.github.io/2023/08/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%9B%E7%BA%A7/</guid>
+            <title>计算机四级考试</title>
+            <link>https://chendouxing.github.io/2023/08/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%9B%E7%BA%A7/</link>
+            <category>计算机等级考试</category>
+            <pubDate>Thu, 24 Aug 2023 14:39:06 +0800</pubDate>
+            <description><![CDATA[ &lt;link rel=&#34;stylesheet&#34; class=&#34;aplayer-secondary-style-marker&#34; href=&#34;\assets\css\APlayer.min.css&#34;&gt;&lt;script src=&#34;\assets\js\APlayer.min.js&#34; class=&#34;aplayer-secondary-script-marker&#34;&gt;&lt;/script&gt;&lt;h1 id=&#34;数据库原理&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#数据库原理&#34;&gt;#&lt;/a&gt; 数据库原理&lt;/h1&gt;
+&lt;h1 id=&#34;操作系统原理&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#操作系统原理&#34;&gt;#&lt;/a&gt; 操作系统原理&lt;/h1&gt;
+ ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">https://chendouxing.github.io/2023/04/03/%E6%95%B0%E6%8D%AE%E7%AB%8B%E6%96%B9%E4%BD%93/</guid>
             <title>数据立方体</title>
@@ -26,16 +35,6 @@
             <pubDate>Mon, 03 Apr 2023 21:49:27 +0800</pubDate>
             <description><![CDATA[ &lt;link rel=&#34;stylesheet&#34; class=&#34;aplayer-secondary-style-marker&#34; href=&#34;\assets\css\APlayer.min.css&#34;&gt;&lt;script src=&#34;\assets\js\APlayer.min.js&#34; class=&#34;aplayer-secondary-script-marker&#34;&gt;&lt;/script&gt;&lt;h1 id=&#34;数据立方体&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#数据立方体&#34;&gt;#&lt;/a&gt; 数据立方体&lt;/h1&gt;
 &lt;p&gt;冰山立方体，其根据最小支持度阈值来对数据立方体单元的一部分进行物化，不仅能够节省处理时间和磁盘空间，而且还能够实现更加聚集的分析。&lt;/p&gt;
- ]]></description>
-        </item>
-        <item>
-            <guid isPermalink="true">https://chendouxing.github.io/2023/03/31/python/</guid>
-            <title>python</title>
-            <link>https://chendouxing.github.io/2023/03/31/python/</link>
-            <category>语言</category>
-            <category>python</category>
-            <pubDate>Fri, 31 Mar 2023 17:43:48 +0800</pubDate>
-            <description><![CDATA[ &lt;link rel=&#34;stylesheet&#34; class=&#34;aplayer-secondary-style-marker&#34; href=&#34;\assets\css\APlayer.min.css&#34;&gt;&lt;script src=&#34;\assets\js\APlayer.min.js&#34; class=&#34;aplayer-secondary-script-marker&#34;&gt;&lt;/script&gt;&lt;h1 id=&#34;python&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#python&#34;&gt;#&lt;/a&gt; python&lt;/h1&gt;
  ]]></description>
         </item>
         <item>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+    <id>https://chendouxing.github.io</id>
+    <title>蟹堡王海星 • Posts by &#34;数据立方体&#34; tag</title>
+    <link href="https://chendouxing.github.io" />
+    <updated>2023-04-03T13:49:27.000Z</updated>
+    <category term="语言" />
+    <category term="SQL" />
+    <category term="数学" />
+    <category term="课堂学习" />
+    <category term="数据库" />
+    <category term="数据立方体" />
+    <category term="计算机等级考试" />
+    <category term="考试" />
+    <category term="论文" />
+    <entry>
+        <id>https://chendouxing.github.io/2023/04/03/%E6%95%B0%E6%8D%AE%E7%AB%8B%E6%96%B9%E4%BD%93/</id>
+        <title>数据立方体</title>
+        <link rel="alternate" href="https://chendouxing.github.io/2023/04/03/%E6%95%B0%E6%8D%AE%E7%AB%8B%E6%96%B9%E4%BD%93/"/>
+        <content type="html">&lt;link rel=&#34;stylesheet&#34; class=&#34;aplayer-secondary-style-marker&#34; href=&#34;\assets\css\APlayer.min.css&#34;&gt;&lt;script src=&#34;\assets\js\APlayer.min.js&#34; class=&#34;aplayer-secondary-script-marker&#34;&gt;&lt;/script&gt;&lt;h1 id=&#34;数据立方体&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#数据立方体&#34;&gt;#&lt;/a&gt; 数据立方体&lt;/h1&gt;
+&lt;p&gt;冰山立方体，其根据最小支持度阈值来对数据立方体单元的一部分进行物化，不仅能够节省处理时间和磁盘空间，而且还能够实现更加聚集的分析。&lt;/p&gt;
+</content>
+        <category term="数据库" />
+        <category term="数据立方体" />
+        <updated>2023-04-03T13:49:27.000Z</updated>
+    </entry>
+</feed>
