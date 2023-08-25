@@ -9,9 +9,9 @@
         <lastBuildDate>Thu, 24 Aug 2023 14:39:06 +0800</lastBuildDate>
         <category>语言</category>
         <category>SQL</category>
-        <category>计算机等级考试</category>
         <category>数学</category>
         <category>课堂学习</category>
+        <category>计算机等级考试</category>
         <category>论文</category>
         <item>
             <guid isPermalink="true">https://chendouxing.github.io/2023/08/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%9B%E7%BA%A7%E8%80%83%E8%AF%95/</guid>
@@ -58,6 +58,59 @@
 &lt;p&gt;主站点技术是一种识别数据项副本的并发控制方法；主站点技术中所有的识别副本都保留在同一站点上，&lt;strong&gt;尽管所有的锁都在主站点上存取，但数据项本身可以在它们所在的任何站点上存取&lt;/strong&gt;，主站点技术的好处是它是集中式方案的简单扩展，因此不太复杂。&lt;/p&gt;
 &lt;p&gt;关联规则，指的是同时满足最小支持度阈值和最小可信度阈值的规则。关联规则挖掘的总体性能由从项集中找出频繁项集的过程决定，常用的关联规则挖掘算法有 Aprior 算法、采样算法、分区算法等。&lt;strong&gt;一个频繁项集的超集可以是频繁项集，也可以不是&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;大多数的 WEB 产品都是通过牺牲一致性来换取高可用性&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;强一致性&lt;/strong&gt;：对于关系型数据库，要求更新过的数据都能被后续的访问看到。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;最终一致性&lt;/strong&gt;：如果经过一段时间后，要求能访问到更新后的数据。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;星形模型由一个事实表和每个维对应的维表组成&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;SCRUD&lt;/strong&gt; 操作分别指&lt;strong&gt; Search&lt;/strong&gt;、Create、Read、Update、Delete。&lt;/p&gt;
+&lt;p&gt;对于遵循维格式的数据，在&lt;strong&gt;多维矩阵（数据立方体）上的查询性能优于关系数据模型上的查询性能&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;对象查询语言 **（OQL）在设计时需要与编程语言紧密配合使用 **，&lt;strong&gt;OQL 语法与 SQL 的语法相似&lt;/strong&gt;，只是增加了有关 ODMG 概念的特征。&lt;/p&gt;
+&lt;p&gt;如果某个账户&lt;strong&gt;没有 CREATE TABLE 权限&lt;/strong&gt;，那么这个账户就&lt;strong&gt;不能创建任何关系&lt;/strong&gt;；矩阵中的每个位置&lt;strong&gt; M (i，j) 表示主体 i 有对象 j 的权限类型&lt;/strong&gt; (读、写和更新)。&lt;/p&gt;
+&lt;p&gt;在面向对象的程序设计语言中的对象称为&lt;strong&gt;临时对象&lt;/strong&gt;，面向对象数据库永远在二级存储器中存储持久的对象。&lt;/p&gt;
+&lt;p&gt;对象数据库 (ODB) 设计与关系数据库 (RDB) 设计之间最主要的区别是：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;如何处理联系；&lt;/li&gt;
+&lt;li&gt;如何处理继承；&lt;/li&gt;
+&lt;li&gt;在对象数据库设计中，有必要在设计时尽早指定操作。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;数字签名由一个符号串组成，&lt;strong&gt;签名对每个应用来说必须是不同的&lt;/strong&gt;；&lt;strong&gt;公钥技术&lt;/strong&gt;是创建此类特性的数字签名的&lt;strong&gt;最好办法&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;在多重继承的一般性规则中，只有&lt;strong&gt;当两个超类型中的同名函数不相同时才会发生二义性&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;每个对象标识符&lt;strong&gt; OID 只能被使用一次&lt;/strong&gt;，OID 在对象生成时产生，&lt;strong&gt;在撤销对象时被注销&lt;/strong&gt;，无法再赋予另外的对象。&lt;/p&gt;
+&lt;p&gt;公钥加密模式 (或者公钥构架) 的组成部分：明文、加密算法、公钥、私钥、密文和解密算法。&lt;/p&gt;
+&lt;p&gt;OLAP 服务器是位于客户与数据仓库服务器之间的一个服务器。关系 OLAP 服务器是 OLAP 服务器的一种实现，是扩充的关系型 DBMS，提供对多维数据库的支持。多维 OLAP 服务器是 OLAP 服务器的一种实现，它是一种特殊的服务器，直接支持多维数据的存储和操作。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;NOSQL 系统常常使用水平扩展&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;在多维模式中，&lt;strong&gt;雪花模式比星形模式的数据冗余要低&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;数据库安全性的一般控制措施包括：&lt;strong&gt;访问控制&lt;/strong&gt;、&lt;strong&gt;推理控制&lt;/strong&gt;、&lt;strong&gt;流控制&lt;/strong&gt;、&lt;strong&gt;数据加密&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;NOSQL 数据库&lt;/strong&gt;把文件的&lt;strong&gt;记录共享在多个节点&lt;/strong&gt;上，以分担对数据的访问。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;自主安全性机制的任务&lt;/strong&gt;包含：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;权限授予（GRANT）&lt;/li&gt;
+&lt;li&gt;权限收回（REVOKE）&lt;/li&gt;
+&lt;li&gt;传播权限（GRANT OPTION）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;强制安全性机制用于对多级安全性进行控制，将用户和数据分为多个安全类别；&lt;strong&gt;基于角色的安全性机制是强制安全性机制的一个扩展&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;一般把 NOSQL 所采用的模型分为四类：键值、文档、列和图。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;公钥加密使用两个独立的密钥&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;CGI&lt;/strong&gt; 作为一个独立的进程在 Web 服务器上运行，&lt;strong&gt;进程的创建和关闭都会严重消耗系统资源&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;API 与 CGI 两种编程接口均存在缺陷：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;用户界面受 HTML 语言的限制；&lt;/li&gt;
+&lt;li&gt;Web 服务器负载过重；&lt;/li&gt;
+&lt;li&gt;HTTP 协议的效率低。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;行和数组类型构造器用于指定复杂类型，称为用户自定义类型&lt;/strong&gt;；行类型对应于元组 (或结构) 构造器；数组类型对应指定汇集（集合）； SQL 提供了类似于类定义的构造，用户可以通过该构造创建命名的用户自定义类型。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;统计数据库安全技术禁止对个体数据进行检索&lt;/strong&gt;，只允许使用聚集类型的函数。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;一个大项集 (频繁项集) 的子集必须是大项集&lt;/strong&gt;，&lt;strong&gt;一个小项集&lt;/strong&gt; (&lt;strong&gt;非频繁项集&lt;/strong&gt;)&lt;strong&gt; 的超集是小项集&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;在关系授权和收回权限的&lt;strong&gt;自主访问控制技术，是一种 &amp;quot;all-or-nothing&amp;quot; 的方法&lt;/strong&gt;，即一个用户要么拥有该特权，要么没有该特权。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;水平扩展&lt;/strong&gt;：增加分布式系统的节点数量；&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;垂直扩展&lt;/strong&gt;：对系统的单个节点的能力进行扩充，比如增加存储能力和处理能力。&lt;/p&gt;
+&lt;h2 id=&#34;多选题&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#多选题&#34;&gt;#&lt;/a&gt; 多选题&lt;/h2&gt;
+&lt;p&gt;DBMS 提供模式数据定义语言（DDL）&lt;strong&gt;来描述逻辑模式&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;常用的&lt;strong&gt;逻辑数据模型&lt;/strong&gt;包括基于记录的模型（&lt;strong&gt;层次模型、网状模型、关系模型&lt;/strong&gt;）、&lt;strong&gt;面向对象模型和对象关系模型&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;概念数据模型&lt;/strong&gt;包括实体联系模型（E-R 模型）、扩充的实体联系模型（EER 模型）、&lt;strong&gt;面向对象模型&lt;/strong&gt;、&lt;strong&gt;谓词模型&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;面向对象模型可以是概念模型，也可以是逻辑模型&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;DBMS 还提供以下各方面数据控制功能：支持数据的多视图；支持数据共享和多用户事务处理；具有可控的冗余，&lt;strong&gt;提供数据库数据的安全性保护&lt;/strong&gt;，限制非授权的访问；为程序对象提供持久性存储；提供高效查询处理的存储结构，&lt;strong&gt;支持高效的数据查询处理与优化&lt;/strong&gt;；&lt;strong&gt;提供数据库的备份和恢复功能&lt;/strong&gt;；&lt;strong&gt; 提供定义和确保数据库完整性检查&lt;/strong&gt;；提供多用户界面；可缩短程序开发时间；&lt;strong&gt;并发控制&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;数据库管理员的职责包括&lt;/strong&gt;：&lt;strong&gt;确定数据库中的信息内容和结构&lt;/strong&gt;；&lt;strong&gt;确定数据库的存储结构和存取策略&lt;/strong&gt;；&lt;strong&gt; 定义数据的安全性要求和完整性约束&lt;/strong&gt;；监控数据库的使用和运行；数据库的性能改进；定期对数据库进行重组或重构，以提高系统的性能。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;关系模型是数学化模型&lt;/strong&gt;，&lt;strong&gt;关系模型中数据的逻辑结构是一张二维表&lt;/strong&gt;。&lt;/p&gt;
 &lt;h1 id=&#34;操作系统原理&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#操作系统原理&#34;&gt;#&lt;/a&gt; 操作系统原理&lt;/h1&gt;
  ]]></description>
         </item>
