@@ -7,11 +7,11 @@
         <language>zh-CN</language>
         <pubDate>Tue, 28 Mar 2023 18:51:10 +0800</pubDate>
         <lastBuildDate>Tue, 28 Mar 2023 18:51:10 +0800</lastBuildDate>
+        <category>语言</category>
+        <category>SQL</category>
         <category>数学</category>
         <category>课堂学习</category>
         <category>计算机等级考试</category>
-        <category>语言</category>
-        <category>SQL</category>
         <category>论文</category>
         <item>
             <guid isPermalink="true">https://chendouxing.github.io/2023/03/28/%E8%AE%BA%E6%96%87/</guid>
@@ -200,7 +200,7 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;f1查询架构的概述&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#f1查询架构的概述&#34;&gt;#&lt;/a&gt; F1 查询架构的概述&lt;/h4&gt;
-&lt;p&gt;![F1 overview](/images/F1 overview.png)&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/image-20230828202120168.png&#34; alt=&#34;image-20230828202120168&#34;&gt;&lt;/p&gt;
 &lt;h5 id=&#34;架构&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#架构&#34;&gt;#&lt;/a&gt; 架构&lt;/h5&gt;
 &lt;p&gt;图 1 描述了单个数据中心内的基本架构和组件之间的通信。用户通过 F1 Query 的客户端库与 F1 Query 进行交互，该库将请求发送到几个专用服务器中的一个（称为 F1 服务器）。F1 主站是数据中心内的专用节点，负责查询执行的运行时监控，并维护该数据中心的所有 F1 服务器。小型查询和事务开始在接收请求的直接 F1 服务器上执行。F1 通过在 worker 池中的 worker 上动态地提供执行线程来调度用于分布式执行的较大查询。最大的查询被安排在使用 MapReduce 框架的批处理执行模式中执行。最终结果在 F1 服务器上收集，然后返回给客户端。F1 服务器和 worker 通常是无状态的，允许客户端每次与任意 F1 服务器通信。由于 F1 服务器和工作器不存储数据，因此添加新的 F1 服务器或工作器不会触发任何数据重新分配成本。因此，数据中心的 F1 Query 部署可以通过添加更多服务器或工作器轻松地向外展。&lt;/p&gt;
 &lt;h5 id=&#34;查询执行&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#查询执行&#34;&gt;#&lt;/a&gt; 查询执行&lt;/h5&gt;
