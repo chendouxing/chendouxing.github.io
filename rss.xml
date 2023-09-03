@@ -9,9 +9,9 @@
         <lastBuildDate>Thu, 31 Aug 2023 20:07:15 +0800</lastBuildDate>
         <category>源码</category>
         <category>SQL</category>
-        <category>语言</category>
         <category>数学</category>
         <category>课堂学习</category>
+        <category>语言</category>
         <category>计算机等级考试</category>
         <category>论文</category>
         <item>
@@ -133,6 +133,45 @@
 &lt;p&gt;&lt;strong&gt;关系操作的方式为一次一个集合&lt;/strong&gt;，&lt;strong&gt;非关系操作的方式为一次一个记录&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;数据完整性包括实体完整性&lt;/strong&gt;、&lt;strong&gt;参照完整性和用户定义完整性&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;为维护数据完整性，在将新元组 t 插入到关系 R 时，需要进行完整性检查，&lt;strong&gt;若关系&lt;/strong&gt; R&lt;strong&gt; 是参照关系&lt;/strong&gt;，&lt;strong&gt;则需要对被参照关系进行检查&lt;/strong&gt;，&lt;strong&gt;看是否会违反参照完整性约束&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;关系操作通过关系语言实现，关系语言的特点&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;高度非过程化&lt;/strong&gt;。关系操作的特点是集合操作方式，即操作的对象和操作的结果都是集合；&lt;strong&gt;非过程化是指&lt;/strong&gt;:&lt;strong&gt; 用户不必请求&lt;/strong&gt; DBA&lt;strong&gt; 为它建立特殊的存取路径&lt;/strong&gt;，&lt;strong&gt;存取路径的选择由&lt;/strong&gt; DBMS&lt;strong&gt; 的优化机制来完成&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;用户不必求助于循环和递归来完成数据的重复的操作&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;一个关系对应一个二维表，&lt;strong&gt;每个关系仅有一种关系模式&lt;/strong&gt;，&lt;strong&gt;并非任何一张二维表都可以表示一个关系&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;在关系数据模型中，用单一的二维表结构来表示实体与实体之间的联系。&lt;strong&gt;二维表的一行称为一个元组&lt;/strong&gt;，&lt;strong&gt;超码的子集不是码&lt;/strong&gt;，一个关系的外码不一定是该关系的一个码，但一定是另一个关系的主码。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;外码可以取空值&lt;/strong&gt;，还可以等于主码值。&lt;/p&gt;
+&lt;p&gt;外部并是为了用于从两个&lt;strong&gt;不&lt;/strong&gt;满足相容条件的关系得到它们元组的并集而开发的，两个关系 R 和 S 的半连接具有对称性&lt;strong&gt;不等价于&lt;/strong&gt; R 和 S 的半连接与 S 和 R 的半连接等价。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;并&lt;/strong&gt;、&lt;strong&gt;差&lt;/strong&gt;、&lt;strong&gt;笛卡儿积&lt;/strong&gt;、&lt;strong&gt;投影和选择这五种操作称为基本的关系代数操作&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;用户定义完整性约束&lt;/strong&gt;反映的是某一具体应用所涉及的数据必须满足的&lt;strong&gt;语义要求&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;如果两个关系没有公共属性，那么他们的自然连接就变为笛卡尔积。&lt;/p&gt;
+&lt;p&gt;关系的形式定义指从数学的观点定义关系，有两种定义方法：&lt;strong&gt;用集合论的观点定义关系&lt;/strong&gt;；&lt;strong&gt;用值域来定义关系&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;对关系的描述称为关系模式。&lt;strong&gt;一般来说&lt;/strong&gt;，&lt;strong&gt;每个关系至少有一个默认的超码或超键&lt;/strong&gt;，即&lt;strong&gt;该关系的所有属性的集合，也是这个关系的最大超码或超键&lt;/strong&gt;。&lt;strong&gt;一个关系的候选码或候选键是这个关系的最小超码或超键&lt;/strong&gt;。&lt;strong&gt;关系中包含在任何一个候选码中的属性称为主属性或码属性&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;实体完整性规则是指关系中的元组在组成主键的属性上不能为空；&lt;strong&gt;实体完整性约束是对关系的约束&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;参照完整性是定义建立关系之间联系的主关键字与外部关键字引用的约束条件。&lt;/p&gt;
+&lt;p&gt;用户自定义完整性约束由用户根据用户需要定义，它反映某一具体应用所涉及的数据必须满足的语义要求，主要是对属性的取值进行限定，所以主要是域完整性约束。&lt;/p&gt;
+&lt;p&gt;域完整性约束，是对属性的值域的约束，是指对关系中属性取值的正确性限制：包括数据类型、精度、取值范围、是否允许空值、是否有默认值等。域完整性约束是对属性的值域的约束，是指对关系中属性取值的正确性限制。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;外码可以为空值&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;关系操作是一次一个集合。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;超码指关系中移除某个属性，但它仍然是这个关系的码。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;全码指所有属性共同构成的一个候选码&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;扩充的关系操作，这类操作主要有广义连接、赋值、外连接、半连接、聚集、外部并等。广义投影是对投影的扩展。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;自然连接是一种特殊的等值连接&lt;/strong&gt;，&lt;strong&gt;除操作要求参加运算的关系必须出自相同的域集&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;投影不仅消去原关系中的某些列，&lt;strong&gt;而且也可能消除原关系中的元组&lt;/strong&gt;，因为消去了某些属性列后，就可能出现重复行，应消去这些完全相同的行。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;聚集操作不是一种能够用基本关系代数操作表示的请求类型操作&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;两个关系如果满足相容性条件则这两个关系具有相同的属性个数，并且每对相对应的属性都具有相同的域。&lt;/p&gt;
+&lt;p&gt;一般情况下，当对关系 R 和 S 使用&lt;strong&gt;自然连接&lt;/strong&gt;时，要求 R 和 S 含有&lt;strong&gt;一个或多个共有的属性&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;外连接分为左外连接、右外连接和全外连接。&lt;/p&gt;
+&lt;p&gt;预定义数据类型包括数值型、字符串型、位串型、时间型和布尔型。&lt;/p&gt;
+&lt;p&gt;数据定义语言（DDL）：用来创建数据库的各种对象，包括数据库模式、表、视图、索引、域、触发器、自定义类型等。&lt;/p&gt;
+&lt;p&gt;视图是关系数据库系统提供给用户以多种角度观察数据库中数据的重要机制。&lt;strong&gt;基本表中的数据发生变化&lt;/strong&gt;，&lt;strong&gt;从视图中查询得出的数据也就随之改变&lt;/strong&gt;。组成视图的属性列必须依照上面的原则，或者全部省略或者全部指定。&lt;strong&gt;把对视图的查询转换为对基本表的查询的过程称为视图的消解&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;嵌入式 SQL 与主语言之间的通信方式有 SQL 通信区、主变量和游标。&lt;/p&gt;
+&lt;p&gt;存储文件的逻辑结构组成了 SQL 数据库的内模式，存储文件的物理结构对用户是透明的，由操作系统来管理。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;当视图对应的基本表被删除时&lt;/strong&gt;，&lt;strong&gt;其视图不会同时删除&lt;/strong&gt;，只是失效。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;视图的删除仅仅指数据字典中删除视图的定义&lt;/strong&gt;。如果给出选项 CASCADE, 则由该视图带出的所有视图也同时被删除；一个视图被删除后，由该视图导出的其他视图也将失效 (并非删除）。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;一个 UPDATE 语句只能对一个表的行进行更新。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;在 CREATE TABLE 语句中必须给出所创建的表中的每一个列的列名，同时需要指明每个属性的 (列名) 的 &amp;lt; 数据类型 &amp;gt;。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;数据库设计分为 6 个阶段：&lt;strong&gt;需求分析&lt;/strong&gt;、概念结构设计、&lt;strong&gt;逻辑结构设计&lt;/strong&gt;、&lt;strong&gt;物理结构设计&lt;/strong&gt;、&lt;strong&gt;数据库实施&lt;/strong&gt;、数据库运行和维护。&lt;/p&gt;
 &lt;h1 id=&#34;操作系统原理&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#操作系统原理&#34;&gt;#&lt;/a&gt; 操作系统原理&lt;/h1&gt;
  ]]></description>
         </item>
