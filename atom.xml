@@ -6,7 +6,7 @@
   <link href="https://chendouxing.github.io/atom.xml" rel="self"/>
   
   <link href="https://chendouxing.github.io/"/>
-  <updated>2023-08-31T12:41:51.881Z</updated>
+  <updated>2023-09-06T06:40:31.209Z</updated>
   <id>https://chendouxing.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>分布式论文阅读</title>
+    <link href="https://chendouxing.github.io/2023/09/06/%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/"/>
+    <id>https://chendouxing.github.io/2023/09/06/%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/</id>
+    <published>2023-09-06T06:38:56.000Z</published>
+    <updated>2023-09-06T06:40:31.209Z</updated>
+    
+    <content type="html"><![CDATA[<link rel="stylesheet" class="aplayer-secondary-style-marker" href="\assets\css\APlayer.min.css"><script src="\assets\js\APlayer.min.js" class="aplayer-secondary-script-marker"></script>]]></content>
+    
+    
+      
+      
+    <summary type="html">&lt;link rel=&quot;stylesheet&quot; class=&quot;aplayer-secondary-style-marker&quot; href=&quot;\assets\css\APlayer.min.css&quot;&gt;&lt;script src=&quot;\assets\js\APlayer.min.js&quot; cla</summary>
+      
+    
+    
+    
+    <category term="论文" scheme="https://chendouxing.github.io/categories/%E8%AE%BA%E6%96%87/"/>
+    
+    <category term="数据库论文" scheme="https://chendouxing.github.io/categories/%E8%AE%BA%E6%96%87/%E6%95%B0%E6%8D%AE%E5%BA%93%E8%AE%BA%E6%96%87/"/>
+    
+    
+    <category term="论文" scheme="https://chendouxing.github.io/tags/%E8%AE%BA%E6%96%87/"/>
+    
+    <category term="分布式" scheme="https://chendouxing.github.io/tags/%E5%88%86%E5%B8%83%E5%BC%8F/"/>
+    
+  </entry>
   
   <entry>
     <title>postgre源码</title>
