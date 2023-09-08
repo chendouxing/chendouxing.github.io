@@ -9,12 +9,12 @@
         <lastBuildDate>Wed, 06 Sep 2023 14:38:56 +0800</lastBuildDate>
         <category>源码</category>
         <category>SQL</category>
-        <category>论文</category>
-        <category>分布式</category>
         <category>语言</category>
         <category>数学</category>
         <category>课堂学习</category>
         <category>计算机等级考试</category>
+        <category>论文</category>
+        <category>分布式</category>
         <item>
             <guid isPermalink="true">https://chendouxing.github.io/2023/09/06/%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/</guid>
             <title>分布式论文阅读</title>
@@ -171,6 +171,105 @@
 &lt;h3 id=&#34;3pc的缺点&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#3pc的缺点&#34;&gt;#&lt;/a&gt; 3PC 的缺点&lt;/h3&gt;
 &lt;p&gt;相对于 2PC，3PC 主要解决的单点故障问题，并减少阻塞，因为一旦参与者无法及时收到来自协调者的信息之后，他会默认执行 commit，而不会一直持有事务资源并处于阻塞状态。但是这种机制也会导致数据一致性问题，因为，由于网络原因，协调者发送的 abort 响应没有及时被参与者接收到，那么参与者在等待超时之后执行了 commit 操作，这样就和其他接到 abort 命令并执行回滚的参与者之间存在数据不一致的情况。&lt;/p&gt;
 &lt;hr&gt;
+&lt;h2 id=&#34;多版本并发控制mvcc原理&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#多版本并发控制mvcc原理&#34;&gt;#&lt;/a&gt; 多版本并发控制（MVCC）原理&lt;/h2&gt;
+&lt;p&gt;参考&lt;a href=&#34;https://juejin.cn/post/7016165148020703246&#34;&gt;看一遍就理解：MVCC 原理详解 - 掘金 (juejin.cn)&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;事务并发存在的问题&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#事务并发存在的问题&#34;&gt;#&lt;/a&gt; 事务并发存在的问题&lt;/h3&gt;
+&lt;p&gt;事务并发会引起&lt;strong&gt;脏读、不可重复读、幻读&lt;/strong&gt;问题。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;脏读：如果一个事务读取到了另一个事务未提交修改过的数据，称发生了&lt;strong&gt;脏读&lt;/strong&gt;现象。&lt;/li&gt;
+&lt;li&gt;不可重复读：同一个事务内，前后多次读取，读取到的数据内容不一致。在事务 A 范围内，两个相同的查询，读取同一条记录，却返回了不同的数据，这称为&lt;strong&gt;不可重复读&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;幻读：如果一个事务先根据某些搜索条件查询出一些记录，在该事务未提交时，另一个事务写入了一些符合那些搜索条件的记录（如 insert、delete、update），就意味着发生了&lt;strong&gt;幻读&lt;/strong&gt;。事务 A 查询一个范围的结果集，另一个并发事务 B 往这个范围中插入新的数据，并提交事务，然后事务 A 再次查询相同的范围，两次读取到的结果集却不一样了，这就是&lt;strong&gt;幻读&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;四大隔离级别&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#四大隔离级别&#34;&gt;#&lt;/a&gt; 四大隔离级别&lt;/h3&gt;
+&lt;p&gt;为了解决并发事务存在的&lt;strong&gt;脏读、不可重复读、幻读&lt;/strong&gt;等问题，数据库设计了四种隔离级别，分别是&lt;strong&gt;读未提交，读已提交，可重复读，串行化（Serializable）&lt;/strong&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;读未提交&lt;/p&gt;
+&lt;p&gt;读未提交隔离级别，只限制了两个数据&lt;strong&gt;不能同时修改&lt;/strong&gt;，但是修改数据的时候，即使事务未提交，都是可以被别的事务读取到的，这级别的事务隔离有脏读、重复读、幻读的问题；&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;读已提交&lt;/p&gt;
+&lt;p&gt;读已提交隔离级别，当前事务只能读取到其他事务&lt;strong&gt;提交&lt;/strong&gt;的数据，所以这种事务的隔离级别&lt;strong&gt;解决了脏读&lt;/strong&gt;问题，但还是会存在&lt;strong&gt;重复读、幻读&lt;/strong&gt;问题；&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;可重复读&lt;/p&gt;
+&lt;p&gt;可重复读隔离级别，限制了读取数据的时候，不可以进行修改，所以&lt;strong&gt;解决了重复读&lt;/strong&gt;的问题，但是读取范围数据的时候，是可以插入数据，所以还会存在&lt;strong&gt;幻读&lt;/strong&gt;问题；&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;可串行化&lt;/p&gt;
+&lt;p&gt;事务最高的隔离级别，在该级别下，所有事务都是进行&lt;strong&gt;串行化顺序&lt;/strong&gt;执行的。可以避免脏读、不可重复读与幻读所有并发问题。但是这种事务隔离级别下，事务执行很耗性能。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;/images/image-20230907185451838.png&#34; alt=&#34;image-20230907185451838&#34;&gt;&lt;/p&gt;
+&lt;h3 id=&#34;mvcc概述&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#mvcc概述&#34;&gt;#&lt;/a&gt; MVCC 概述&lt;/h3&gt;
+&lt;p&gt;通俗的说，数据库中同时存在多个版本的数据，并不是整个数据库的多个版本，而是某一条记录的多个版本同时存在，在某个事务对其进行操作的时候，需要查看这一条记录的隐藏列事务版本 id，比对事务 id 并根据事物隔离级别去判断读取哪个版本的数据。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;事务版本号&lt;/p&gt;
+&lt;p&gt;事务每次开启前，都会从数据库获得一个&lt;strong&gt;自增长&lt;/strong&gt;的事务 ID，可以从事务 ID 判断事务的执行先后顺序，这就是事务版本号。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;隐式字段&lt;/p&gt;
+&lt;p&gt;对于 InnoDB 存储引擎，每一行记录都有两个隐藏列&lt;strong&gt; trx_id&lt;/strong&gt;、&lt;strong&gt;roll_pointer&lt;/strong&gt;，如果表中没有主键和非 NULL 唯一键时，则还会有第三个隐藏的主键列&lt;strong&gt; row_id&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/image-20230907190609258.png&#34; alt=&#34;image-20230907190609258&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;undo log&lt;/p&gt;
+&lt;p&gt;undo log，&lt;strong&gt;回滚日志&lt;/strong&gt;，用于记录数据被修改前的信息。在表记录修改之前，会先把数据拷贝到 undo log 里，如果事务回滚，即可以通过 undo log 来还原数据。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;版本链&lt;/p&gt;
+&lt;p&gt;多个事务并行操作某一行数据时，不同事务对该行数据的修改会产生多个版本，然后通过回滚指针（roll_pointer），连成一个链表，这个链表就称为&lt;strong&gt;版本链&lt;/strong&gt;。通过版本链，我们就可以看出&lt;strong&gt;事务版本号、表格隐藏的列和 undo log&lt;/strong&gt; 它们之间的关系。如下：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/69abb7c89d1e4d9f8e242d9e0a410e3e~tplv-k3u1fbpfcp-zoom-i&#34; alt=&#34;版本链&#34;&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;快照读和当前读&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;快照读：&lt;/strong&gt; 读取的是记录数据的可见版本（有旧的版本）。不加锁，普通的 select 语句都是快照读。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;当前读&lt;/strong&gt;：读取的是记录数据的最新版本，显式加锁的都是当前读。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Read View&lt;/p&gt;
+&lt;p&gt;事务执行 SQL 语句时，产生的读视图。实际上在 innodb 中，每个 SQL 语句执行前都会得到一个 Read View。它主要是用来做可见性判断的，即判断当前事务可见哪个版本的数据。&lt;/p&gt;
+&lt;p&gt;相关参数：&lt;/p&gt;
+&lt;p&gt;m_ids：当前系统中那些活跃 (未提交) 的读写事务 ID, 它数据结构为一个 List。&lt;/p&gt;
+&lt;p&gt;min_limit_id：表示在生成 ReadView 时，当前系统中活跃的读写事务中最小的事务 id，即 m_ids 中的最小值。&lt;/p&gt;
+&lt;p&gt;max_limit_id：表示生成 ReadView 时，系统中应该分配给下一个事务的 id 值。&lt;/p&gt;
+&lt;p&gt;creator_trx_id：创建当前 read view 的事务 ID&lt;/p&gt;
+&lt;p&gt;Read View 匹配规则：&lt;/p&gt;
+&lt;p&gt;1、如果数据事务 ID  &lt;code&gt;trx_id &amp;lt; min_limit_id&lt;/code&gt; ，表明生成该版本的事务在生成 Read View 前，已经提交 (因为事务 ID 是递增的)，所以该版本可以被当前事务访问。&lt;/p&gt;
+&lt;p&gt;2、如果 &lt;code&gt;trx_id&amp;gt;= max_limit_id&lt;/code&gt; ，表明生成该版本的事务在生成 ReadView 后才生成，所以该版本不可以被当前事务访问。&lt;/p&gt;
+&lt;p&gt;3、如果  &lt;code&gt;min_limit_id =&amp;lt;trx_id&amp;lt; max_limit_id&lt;/code&gt; ，需要分 3 种情况讨论：&lt;/p&gt;
+&lt;p&gt;（1）如果 &lt;code&gt;m_ids&lt;/code&gt;  包含 &lt;code&gt;trx_id&lt;/code&gt; , 则代表 Read View 生成时刻，这个事务还未提交，但是如果数据的 &lt;code&gt;trx_id&lt;/code&gt;  等于 &lt;code&gt;creator_trx_id&lt;/code&gt;  的话，表明数据是自己生成的，因此是&lt;strong&gt;可见&lt;/strong&gt;的。&lt;/p&gt;
+&lt;p&gt;（2）如果 &lt;code&gt;m_ids&lt;/code&gt;  包含 &lt;code&gt;trx_id&lt;/code&gt; ，并且 &lt;code&gt;trx_id&lt;/code&gt;  不等于 &lt;code&gt;creator_trx_id&lt;/code&gt; ，则 Read   View 生成时，事务未提交，并且不是自己生产的，所以当前事务也是&lt;strong&gt;看不见&lt;/strong&gt;的；&lt;/p&gt;
+&lt;p&gt;（3）如果 &lt;code&gt;m_ids&lt;/code&gt;  不包含 &lt;code&gt;trx_id&lt;/code&gt; ，则说明你这个事务在 Read View 生成之前就已经提交了，修改的结果，当前事务是能看见的。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;mvcc实现原理&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#mvcc实现原理&#34;&gt;#&lt;/a&gt; MVCC 实现原理&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;基于 MVCC 查询一条记录&lt;/p&gt;
+&lt;p&gt;1、获取事务自己的版本号，即事务 ID；&lt;/p&gt;
+&lt;p&gt;2、获取 Read View；&lt;/p&gt;
+&lt;p&gt;3、查询得到的数据，然后 Read View 中的事务版本号进行比较；&lt;/p&gt;
+&lt;p&gt;4、如果不符合 Read View 的可见性规则， 即就需要 Undo log 中历史快照；&lt;/p&gt;
+&lt;p&gt;5、最后返回符合规则的数据。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;InnoDB 实现 MVCC，是通过 &lt;code&gt; Read View+ Undo Log&lt;/code&gt;  实现的，Undo Log 保存了历史快照，Read View 可见性规则帮助判断当前版本的数据是否可见。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;读已提交（RC）隔离级别，存在不可重复读问题&lt;/p&gt;
+&lt;p&gt;在&lt;strong&gt;读已提交（RC）隔离级别&lt;/strong&gt;下，同一个事务里，两个相同的查询，读取同一条记录（id=1），却返回了不同的数据（&lt;strong&gt;第一次查出来是孙权，第二次查出来是曹操那条记录&lt;/strong&gt;），因此 RC 隔离级别，存在&lt;strong&gt;不可重复读&lt;/strong&gt;并发问题。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;可重复读（RR）隔离级别，解决不可重复读问题&lt;/p&gt;
+&lt;p&gt;RR 可以解决不可重复读问题，就是跟 Read view 工作方式有关。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在读已提交（RC）隔离级别下，同一个事务里面，&lt;strong&gt;每一次查询都会产生一个新的 Read View 副本&lt;/strong&gt;，这样就可能造成同一个事务里前后读取数据可能不一致的问题（不可重复读并发问题）。&lt;/li&gt;
+&lt;li&gt;在可重复读（RR）隔离级别下，&lt;strong&gt;一个事务里只会获取一次 read view&lt;/strong&gt;，都是副本共用的，从而保证每次查询的数据都是一样的。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
  ]]></description>
         </item>
         <item>
