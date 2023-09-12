@@ -7,14 +7,14 @@
         <language>zh-CN</language>
         <pubDate>Wed, 06 Sep 2023 14:38:56 +0800</pubDate>
         <lastBuildDate>Wed, 06 Sep 2023 14:38:56 +0800</lastBuildDate>
+        <category>论文</category>
+        <category>分布式</category>
         <category>源码</category>
         <category>SQL</category>
         <category>语言</category>
+        <category>计算机等级考试</category>
         <category>数学</category>
         <category>课堂学习</category>
-        <category>计算机等级考试</category>
-        <category>论文</category>
-        <category>分布式</category>
         <item>
             <guid isPermalink="true">https://chendouxing.github.io/2023/09/06/%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/</guid>
             <title>分布式论文阅读</title>
@@ -270,6 +270,151 @@
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;一致性算法&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#一致性算法&#34;&gt;#&lt;/a&gt; 一致性算法&lt;/h2&gt;
+&lt;p&gt;1、为什么需要一致性算法？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;数据不能存在单个节点（主机）上，否则可能出现单点故障。&lt;/li&gt;
+&lt;li&gt;多个节点（主机）需要保证具有相同的数据。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;2、一致性分类：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;强一致性&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;说明：保证系统改变提交以后立即改变集群的状态。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;模型：&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;ul&gt;
+&lt;li&gt;Paxos&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;ul&gt;
+&lt;li&gt;Raft（muti-paxos）&lt;/li&gt;
+&lt;li&gt;ZAB（muti-paxos）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;弱一致性&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;说明：也叫最终一致性，系统不保证改变提交以后立即改变集群的状态，但是随着时间的推移最终状态是一致的。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;模型：&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;ul&gt;
+&lt;li&gt;DNS 系统&lt;/li&gt;
+&lt;li&gt;Gossip 协议&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;paxos算法&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#paxos算法&#34;&gt;#&lt;/a&gt; Paxos 算法&lt;/h3&gt;
+&lt;h4 id=&#34;算法流程&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#算法流程&#34;&gt;#&lt;/a&gt; 算法流程&lt;/h4&gt;
+&lt;p&gt;Paxos 算法解决的问题正是分布式一致性问题，即一个分布式系统中的各个进程如何就某个值（决议）达成一致。&lt;/p&gt;
+&lt;p&gt;Paxos 算法运行在允许宕机故障的异步系统中，不要求可靠的消息传递，可容忍消息丢失、延迟、乱序以及重复。它利用大多数 (Majority) 机制保证了 2F+1 的容错能力，即 2F+1 个节点的系统最多允许 F 个节点同时出现故障。&lt;/p&gt;
+&lt;p&gt;一个或多个提议进程 (Proposer) 可以发起提案 (Proposal)，Paxos 算法使所有提案中的某一个提案，在所有进程中达成一致。系统中的多数派同时认可该提案，即达成了一致。最多只针对一个确定的提案达成一致。&lt;/p&gt;
+&lt;p&gt;Paxos 将系统中的角色分为提议者 (Proposer)，决策者 (Acceptor)，和最终决策学习者 (Learner):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Proposer&lt;/strong&gt;: 提出提案 (Proposal)。Proposal 信息包括提案编号 (Proposal ID) 和提议的值 (Value)。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Acceptor&lt;/strong&gt;：参与决策，回应 Proposers 的提案。收到 Proposal 后可以接受提案，若 Proposal 获得多数 Acceptors 的接受，则称该 Proposal 被批准。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Learner&lt;/strong&gt;：不参与决策，从 Proposers/Acceptors 学习最新达成一致的提案（Value）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Paxos 算法分为&lt;strong&gt;两个阶段&lt;/strong&gt;。具体如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;阶段一：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;(a) Proposer 选择一个&lt;strong&gt;提案编号 N&lt;/strong&gt;，然后向&lt;strong&gt;半数以上&lt;/strong&gt;的 Acceptor 发送编号为 N 的&lt;strong&gt; Prepare 请求&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;(b) 如果一个 Acceptor 收到一个编号为 N 的 Prepare 请求，且 N&lt;strong&gt; 大于&lt;/strong&gt;该 Acceptor 已经&lt;strong&gt;响应过的&lt;/strong&gt;所有&lt;strong&gt; Prepare 请求&lt;/strong&gt;的编号，那么它就会将它已经&lt;strong&gt;接受过的编号最大的提案（如果有的话）&lt;strong&gt;作为响应反馈给 Proposer，同时该 Acceptor 承诺&lt;/strong&gt;不再接受&lt;/strong&gt;任何&lt;strong&gt;编号小于 N 的提案&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;阶段二：&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;(a) 如果 Proposer 收到&lt;strong&gt;半数以上&lt;/strong&gt; Acceptor 对其发出的编号为 N 的 Prepare 请求的&lt;strong&gt;响应&lt;/strong&gt;，那么它就会发送一个针对 **[N,V] 提案&lt;strong&gt;的&lt;/strong&gt; Accept 请求&lt;strong&gt;给&lt;/strong&gt;半数以上&lt;strong&gt;的 Acceptor。注意：V 就是收到的&lt;/strong&gt;响应&lt;strong&gt;中&lt;/strong&gt;编号最大的提案的 value**，如果响应中&lt;strong&gt;不包含任何提案&lt;/strong&gt;，那么 V 就由 Proposer&lt;strong&gt; 自己决定&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;(b) 如果 Acceptor 收到一个针对编号为 N 的提案的 Accept 请求，只要该 Acceptor&lt;strong&gt; 没有&lt;/strong&gt;对编号&lt;strong&gt;大于 N&lt;/strong&gt; 的&lt;strong&gt; Prepare 请求&lt;/strong&gt;做出过&lt;strong&gt;响应&lt;/strong&gt;，它就&lt;strong&gt;接受该提案&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;raft算法&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#raft算法&#34;&gt;#&lt;/a&gt; Raft 算法&lt;/h3&gt;
+&lt;p&gt;Raft 将系统中的角色分为领导者（Leader）、跟随者（Follower）和候选人（Candidate）：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Leader&lt;/strong&gt;：接受客户端请求，并向 Follower 同步请求日志，当日志同步到大多数节点上后告诉 Follower 提交日志。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Follower&lt;/strong&gt;：接受并持久化 Leader 同步的日志，在 Leader 告之日志可以提交之后，提交日志。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Candidate&lt;/strong&gt;：Leader 选举过程中的临时角色。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;概述&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#概述&#34;&gt;#&lt;/a&gt; 概述&lt;/h4&gt;
+&lt;p&gt;Raft 要求系统在任意时刻最多只有一个 Leader，正常工作期间只有 Leader 和 Followers。Follower 只响应其他服务器的请求。如果 Follower 超时没有收到 Leader 的消息，它会成为一个 Candidate 并且开始一次 Leader 选举。收到大多数服务器投票的 Candidate 会成为新的 Leader。Leader 在宕机之前会一直保持 Leader 的状态。&lt;/p&gt;
+&lt;p&gt;Raft 算法将时间分为一个个的任期（term），每一个 term 的开始都是 Leader 选举。在成功选举 Leader 之后，Leader 会在整个 term 内管理整个集群。如果 Leader 选举失败，该 term 就会因为没有 Leader 而结束。&lt;/p&gt;
+&lt;h4 id=&#34;leader选举&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#leader选举&#34;&gt;#&lt;/a&gt; Leader 选举&lt;/h4&gt;
+&lt;p&gt;Raft 使用心跳（heartbeat）触发 Leader 选举。当服务器启动时，初始化为 Follower。Leader 向所有 Followers 周期性发送 heartbeat。如果 Follower 在选举超时时间内没有收到 Leader 的 heartbeat，就会等待一段随机的时间后发起一次 Leader 选举。&lt;/p&gt;
+&lt;p&gt;Follower 将其当前 term 加一然后转换为 Candidate。它首先给自己投票并且给集群中的其他服务器发送 RequestVote RPC。结果有以下三种情况：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;赢得了多数的选票，成功选举为 Leader；&lt;/li&gt;
+&lt;li&gt;收到了 Leader 的消息，表示有其它服务器已经抢先当选了 Leader；&lt;/li&gt;
+&lt;li&gt;没有服务器赢得多数的选票，Leader 选举失败，等待选举时间超时后发起下一次选举。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;选举出 Leader 后，Leader 通过定期向所有 Followers 发送心跳信息维持其统治。若 Follower 一段时间未收到 Leader 的心跳则认为 Leader 可能已经挂了，再次发起 Leader 选举过程。&lt;strong&gt;Raft 保证选举出的 Leader 上一定具有最新的已提交的日志&lt;/strong&gt;。&lt;/p&gt;
+&lt;h4 id=&#34;日志同步&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#日志同步&#34;&gt;#&lt;/a&gt; 日志同步&lt;/h4&gt;
+&lt;p&gt;Leader 选出后，就开始接收客户端的请求。Leader 把请求作为日志条目（Log entries）加入到它的日志中，然后并行的向其他服务器发起 AppendEntries RPC 复制日志条目。当这条日志被复制到大多数服务器上，Leader 将这条日志应用到它的状态机并向客户端返回执行结果。（某些 Followers 可能没有成功的复制日志，Leader 会无限的重试 AppendEntries RPC 直到所有的 Followers 最终存储了所有的日志条目）&lt;/p&gt;
+&lt;p&gt;日志由有序编号（log index）的日志条目组成。每个日志条目包含它被创建时的任期号（term），和用于状态机执行的命令。如果一个日志条目被复制到大多数服务器上，就被认为可以提交（commit）了。&lt;/p&gt;
+&lt;p&gt;Leader 通过强制 Followers 复制它的日志来处理日志的不一致，Followers 上的不一致的日志会被 Leader 的日志覆盖。&lt;/p&gt;
+&lt;h4 id=&#34;安全性&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#安全性&#34;&gt;#&lt;/a&gt; 安全性&lt;/h4&gt;
+&lt;p&gt;Raft 增加了如下两条限制以保证安全性：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;拥有最新的已提交的 log entry 的 Follower 才有资格成为 Leader。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;这个保证是在 RequestVote RPC 中做的，Candidate 在发送 RequestVote RPC 时，要带上自己的最后一条日志的 term 和 log index，其他节点收到消息时，如果发现自己的日志比请求中携带的更新，则拒绝投票。日志比较的原则是，如果本地的最后一条 log entry 的 term 更大，则 term 大的更新，如果 term 一样大，则 log index 更大的更新。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;strong&gt;Leader 只能推进 commit index 来提交当前 term 的已经复制到大多数服务器上的日志，旧 term 日志的提交要等到提交当前 term 的日志来间接提交（log index 小于 commit index 的日志被间接提交）&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;之所以要这样，是因为可能会出现已提交的日志又被覆盖的情况。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;日志压缩&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#日志压缩&#34;&gt;#&lt;/a&gt; 日志压缩&lt;/h4&gt;
+&lt;p&gt;在实际的系统中，不能让日志无限增长，否则系统重启时需要花很长的时间进行回放，从而影响可用性。Raft 采用对整个系统进行 snapshot 来解决，snapshot 之前的日志都可以丢弃。&lt;/p&gt;
+&lt;p&gt;每个副本独立的对自己的系统状态进行 snapshot，并且只能对已经提交的日志记录进行 snapshot。&lt;/p&gt;
+&lt;h4 id=&#34;成员变更&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#成员变更&#34;&gt;#&lt;/a&gt; 成员变更&lt;/h4&gt;
+&lt;p&gt;成员变更是在集群运行过程中副本发生变化，如增加 / 减少副本数、节点替换等。&lt;/p&gt;
+&lt;p&gt;如果将成员变更当成一般的一致性问题，直接向 Leader 发送成员变更请求，Leader 复制成员变更日志，达成多数派之后提交，各服务器提交成员变更日志后从旧成员配置（Cold）切换到新成员配置（Cnew）。因为各个服务器提交成员变更日志的时刻可能不同，造成各个服务器从旧成员配置（Cold）切换到新成员配置（Cnew）的时刻不同。成员变更不能影响服务的可用性，但是成员变更过程的某一时刻，可能出现在 Cold 和 Cnew 中同时存在两个不相交的多数派，进而可能选出两个 Leader，形成不同的决议，破坏安全性。&lt;/p&gt;
+&lt;p&gt;由于成员变更的这一特殊性，成员变更不能当成一般的一致性问题去解决。&lt;/p&gt;
+&lt;p&gt;为了解决这一问题，Raft 提出了两阶段的成员变更方法。集群先从旧成员配置 Cold 切换到一个过渡成员配置，称为共同一致（joint consensus），共同一致是旧成员配置 Cold 和新成员配置 Cnew 的组合 Cold U Cnew，一旦共同一致 Cold U Cnew 被提交，系统再切换到新成员配置 Cnew。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Raft 两阶段成员变更过程如下&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Leader 收到成员变更请求从 Cold 切成 Cold,new；&lt;/li&gt;
+&lt;li&gt;Leader 在本地生成一个新的 log entry，其内容是 Cold∪Cnew，代表当前时刻新旧成员配置共存，写入本地日志，同时将该 log entry 复制至 Cold∪Cnew 中的所有副本。在此之后新的日志同步需要保证得到 Cold 和 Cnew 两个多数派的确认；&lt;/li&gt;
+&lt;li&gt;Follower 收到 Cold∪Cnew 的 log entry 后更新本地日志，并且此时就以该配置作为自己的成员配置；&lt;/li&gt;
+&lt;li&gt;如果 Cold 和 Cnew 中的两个多数派确认了 Cold U Cnew 这条日志，Leader 就提交这条 log entry 并切换到 Cnew；&lt;/li&gt;
+&lt;li&gt;接下来 Leader 生成一条新的 log entry，其内容是新成员配置 Cnew，同样将该 log entry 写入本地日志，同时复制到 Follower 上；&lt;/li&gt;
+&lt;li&gt;Follower 收到新成员配置 Cnew 后，将其写入日志，并且从此刻起，就以该配置作为自己的成员配置，并且如果发现自己不在 Cnew 这个成员配置中会自动退出；&lt;/li&gt;
+&lt;li&gt;Leader 收到 Cnew 的多数派确认后，表示成员变更成功，后续的日志只要得到 Cnew 多数派确认即可。Leader 给客户端回复成员变更执行成功。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;如果增强成员变更的限制，假设 Cold 与 Cnew 任意的多数派交集不为空，这两个成员配置就无法各自形成多数派，那么成员变更方案就可能简化为一阶段。&lt;/p&gt;
+&lt;p&gt;那么如何限制 Cold 与 Cnew，使之任意的多数派交集不为空呢？方法就是每次成员变更只允许增加或删除一个成员。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;一阶段成员变更&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;成员变更限制每次只能增加或删除一个成员（如果要变更多个成员，连续变更多次）。&lt;/li&gt;
+&lt;li&gt;成员变更由 Leader 发起，Cnew 得到多数派确认后，返回客户端成员变更成功。&lt;/li&gt;
+&lt;li&gt;一次成员变更成功前不允许开始下一次成员变更，因此新任 Leader 在开始提供服务前要将自己本地保存的最新成员配置重新投票形成多数派确认。&lt;/li&gt;
+&lt;li&gt;Leader 只要开始同步新成员配置，即可开始使用新的成员配置进行日志同步。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Raft 与 Multi-Paxos 中相似的概念：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/v2-a932cb62a02604d5ec57dc0a046a1414_r.jpg&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;p&gt;Raft 与 Multi-Paxos 的不同：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/v2-7679d235c0ac8056552ba88b677e73a2_r.jpg&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;分布式论文&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#分布式论文&#34;&gt;#&lt;/a&gt; 分布式论文&lt;/h1&gt;
  ]]></description>
         </item>
     </channel>
