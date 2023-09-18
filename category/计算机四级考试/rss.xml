@@ -7,14 +7,14 @@
         <language>zh-CN</language>
         <pubDate>Thu, 24 Aug 2023 14:39:06 +0800</pubDate>
         <lastBuildDate>Thu, 24 Aug 2023 14:39:06 +0800</lastBuildDate>
-        <category>论文</category>
-        <category>分布式</category>
         <category>源码</category>
         <category>SQL</category>
         <category>语言</category>
-        <category>计算机等级考试</category>
         <category>数学</category>
         <category>课堂学习</category>
+        <category>论文</category>
+        <category>分布式</category>
+        <category>计算机等级考试</category>
         <item>
             <guid isPermalink="true">https://chendouxing.github.io/2023/08/24/%E8%AE%A1%E7%AE%97%E6%9C%BA%E5%9B%9B%E7%BA%A7%E8%80%83%E8%AF%95/</guid>
             <title>计算机四级考试</title>
@@ -194,9 +194,54 @@
 &lt;p&gt;&lt;strong&gt;地址映射一般是由硬件完成的&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;快表存放在高速缓存中，&lt;strong&gt;快表的内容是页表的一部分&lt;/strong&gt;，并非全集。&lt;/p&gt;
 &lt;p&gt;文件控制块 (FCB) 一般应包括下列的内容:&lt;strong&gt; 文件名&lt;/strong&gt;，&lt;strong&gt; 文件号&lt;/strong&gt;，用户名，&lt;strong&gt;磁盘块起始地址&lt;/strong&gt;（&lt;strong&gt;文件地址&lt;/strong&gt;），&lt;strong&gt;文件长度&lt;/strong&gt;，文件类型，文件属性，共享计数，&lt;strong&gt;文件建立日期&lt;/strong&gt;，文件物理益等等信息。&lt;/p&gt;
-&lt;p&gt;可以提高文件系统的性能的有:&lt;strong&gt; 块高速缓存&lt;/strong&gt;、&lt;strong&gt;磁盘驱动调度和目录项分解法&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;可以提高文件系统的性能的有：&lt;strong&gt;块高速缓存&lt;/strong&gt;、&lt;strong&gt;磁盘驱动调度和目录项分解法&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;设备与 CPU 之间数据传送和控制方式有&lt;strong&gt;程序直接控制方式&lt;/strong&gt;、&lt;strong&gt;中断控制方式&lt;/strong&gt;、&lt;strong&gt;DMA 方式&lt;/strong&gt;和&lt;strong&gt;通道控制方式&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;解除死锁的方法有:&lt;strong&gt; 剥夺某些进程所占有的资源&lt;/strong&gt;、&lt;strong&gt;撤消某些进程&lt;/strong&gt;和&lt;strong&gt;重新启动系统&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;现代操作系统最基本的特征：&lt;strong&gt;并发性&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;若一个单核处理机的系统中有多个进程存在，则这些进程是&lt;strong&gt;并发运行的&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;在组成计算机系统的各类资源中，主要包含有硬件部件以及&lt;strong&gt;代码和数据&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;从计算机安全保护角度来看，操作系统的主要作用是提供&lt;strong&gt;第一道安全防线&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;操作系统作为系统软件，位于软件系统的&lt;strong&gt;硬件之上，支撑软件之下&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;计算机系统中，操作系统作为系统软件集中了&lt;strong&gt;资源管理和控制程序执行&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;操作系统能够 “合理 “地组织计算机工作流程、控制程序的执行，其中 “合理” 是指&lt;strong&gt;公平对待不同用户程序，不发生 “死锁” 和 “饥饿” 的现象&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;随机性是操作系统的特征之一。下列描述的四种现象中，&lt;strong&gt;操作系统内核进行进程切换&lt;/strong&gt;具有 “随机性”。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;在单处理器环境下，两个程序交替在 CPU 上运行&lt;/strong&gt;具有 “并发性”。&lt;/p&gt;
+&lt;p&gt;操作系统的任务之一是组织和管理计算机系统中的硬件及软件资源，为此在操作系统内部设计了各种数据结构。这些数据结构在操作系统运行中&lt;strong&gt;可以由系统动态更新&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;操作系统的任务之一是向用户提供各种服务功能。&lt;strong&gt;向开发人员提供高效的编程接口&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;实时操作系统的主要设计目标是&lt;strong&gt;在严格时间范围内对外部请求做出反应&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;计算机系统包括硬件和软件，&lt;strong&gt;数据库软件&lt;/strong&gt;是软件系统中的&lt;strong&gt;支撑软件&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;操作系统的功能之一是管理资源，&lt;strong&gt;在操作系统内部设计不同类型的表格&lt;/strong&gt;是用于资源管理的。&lt;/p&gt;
+&lt;p&gt;在不同类型的操作系统中，批处理操作系统的缺点是&lt;strong&gt;缺乏交互性&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;除了进程线程管理、存储管理、文件系统外，&lt;strong&gt;设备管理&lt;/strong&gt;是属于操作系统的必要组成部分。&lt;/p&gt;
+&lt;p&gt;下列关于操作系统的叙述中，正确的是&lt;strong&gt;操作系统作为系统软件，为用户提供了高效使用计算机的接口&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;共享性是操作系统的特征之一，&lt;strong&gt;可重入代码&lt;/strong&gt;可以同时共享。&lt;/p&gt;
+&lt;p&gt;下列&lt;strong&gt;中央处理器、存储器和打印机&lt;/strong&gt;在操作系统控制下可以 “互斥共享 “。&lt;/p&gt;
+&lt;p&gt;共享性是操作系统的特征之一。下列描述的四种资源中，&lt;strong&gt;系统中的扫描仪&lt;/strong&gt;不具有 “同时共享”。&lt;/p&gt;
+&lt;p&gt;** 驻留位（A）** 不包含在程序状态字 (PSW) 中。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;管态或目态&lt;/strong&gt;表示了处理器运行时的状态。&lt;/p&gt;
+&lt;p&gt;处理器的状态由系统态到用户态的转换是通过&lt;strong&gt;修改程序状态字&lt;/strong&gt;实现的。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;处理器处于管态时可以执行全部指令&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;共享性是指操作系统程序与多个用户程序共用系统中的各种资源。能够控制实现共享性的是&lt;strong&gt;操作系统&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;并发性是操作系统的特征之一。&lt;strong&gt;在单处理器上，一个进程运行除法运算，另一个进程利用 DMA 读写内存&lt;/strong&gt;不具有 “并发性”&lt;/p&gt;
+&lt;p&gt;操作系统需要处理器从内核态转为用户态时，采用的是&lt;strong&gt;修改程序状态字&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;操作系统为用户提供了多种使用接口，包括&lt;strong&gt;图标和菜单、命令行、系统调用&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;下列英文名称或縮写中，&lt;strong&gt;SNMP、Eclipse&lt;/strong&gt; 不是操作系统的名称。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;批处理、交互式、实时、分布式&lt;/strong&gt;是指某一种操作系统的类型。&lt;/p&gt;
+&lt;p&gt;当前 Android 操作系统应用广泛，它具有&lt;strong&gt;移动应用、支持网络&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;研究操作系统的观点有多种，它们分别是&lt;strong&gt;软件的观点、资源管理的观点、进程的观点、虚拟机的观点、服务提供者的观点&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;个人计算机操作系统、网络操作系统、分布式操作系统、嵌入式操作系统&lt;/strong&gt;是典型的操作系统类型。&lt;/p&gt;
+&lt;p&gt;微内核 (客户 / 服务器) 结构的操作系统具有下列哪些优点。&lt;strong&gt;高可靠性、高灵活性、适合分布式处理&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;分时操作系统的特点是&lt;strong&gt;多个用户在线同时使用计算机、便于调试程序、能够对用户输入的信息及时响应、用户使用计算机时感觉不到计算机同时在为别人服务&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;分布式操作系统的特点是&lt;strong&gt;系统内所有主机使用同一个操作系统、系统内资源深度共享、用户无需了解系统内本地或异地主机的差异，具有透明性、系统内各主机处于同等地位，不分主次、系统具有较高的可靠性&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;为进程分派 CPU、提供加锁和解锁原语、管理进程的数据结构、完成进程上下文切换&lt;/strong&gt;属于处理器管理范畴。&lt;/p&gt;
+&lt;p&gt;实时操作系统的特点是&lt;strong&gt;具有较高的可靠性、在严格的时间范围内，实时响应用户的请求、具有较好的过载防护能力&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;为用户程序提供系统调用接口、提供缓冲技术、管理通道、网卡等相关的数据结构、提供虚拟设备技术&lt;/strong&gt;属于设备管理和用户接口范畴。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;系统态、用户态&lt;/strong&gt;刻画的是 CPU 的状态。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;主存储器、I/O 控制器、文件、键盘和鼠标&lt;/strong&gt;属于操作系统管理的系统资源。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;调度程序代码、PCB 表、I/O 设备、磁盘、时钟&lt;/strong&gt;属于操作系统管理的系统资源。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;I/O 控制器、CPU、打印机、网卡、系统注册表&lt;/strong&gt;属于操作系统管理的系统资源&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;缺乏独立性、并发性差&lt;/strong&gt;是整体式操作系统结构的主要缺点。&lt;/p&gt;
+&lt;p&gt;对于交互式系统，其调度算法的设计目标是&lt;strong&gt;较快的响应时间、较均衡的性能&lt;/strong&gt;。&lt;/p&gt;
  ]]></description>
         </item>
     </channel>
