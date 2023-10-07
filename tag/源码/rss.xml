@@ -7,9 +7,9 @@
         <language>zh-CN</language>
         <pubDate>Thu, 31 Aug 2023 20:07:15 +0800</pubDate>
         <lastBuildDate>Thu, 31 Aug 2023 20:07:15 +0800</lastBuildDate>
-        <category>源码</category>
-        <category>SQL</category>
         <category>语言</category>
+        <category>SQL</category>
+        <category>源码</category>
         <category>数学</category>
         <category>课堂学习</category>
         <category>论文</category>
@@ -19,8 +19,8 @@
             <guid isPermalink="true">https://chendouxing.github.io/2023/08/31/postgre%E6%BA%90%E7%A0%81/</guid>
             <title>postgre源码</title>
             <link>https://chendouxing.github.io/2023/08/31/postgre%E6%BA%90%E7%A0%81/</link>
-            <category>源码</category>
             <category>SQL</category>
+            <category>源码</category>
             <pubDate>Thu, 31 Aug 2023 20:07:15 +0800</pubDate>
             <description><![CDATA[ &lt;link rel=&#34;stylesheet&#34; class=&#34;aplayer-secondary-style-marker&#34; href=&#34;\assets\css\APlayer.min.css&#34;&gt;&lt;script src=&#34;\assets\js\APlayer.min.js&#34; class=&#34;aplayer-secondary-script-marker&#34;&gt;&lt;/script&gt;&lt;h1 id=&#34;postgresql源码&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#postgresql源码&#34;&gt;#&lt;/a&gt; postgreSQL 源码&lt;/h1&gt;
  ]]></description>
