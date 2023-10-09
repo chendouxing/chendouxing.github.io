@@ -5,19 +5,32 @@
         <link>https://chendouxing.github.io</link>
         <description>花有重开日，人无再少年</description>
         <language>zh-CN</language>
-        <pubDate>Wed, 06 Sep 2023 14:38:56 +0800</pubDate>
-        <lastBuildDate>Wed, 06 Sep 2023 14:38:56 +0800</lastBuildDate>
-        <category>源码</category>
-        <category>SQL</category>
+        <pubDate>Mon, 09 Oct 2023 14:26:24 +0800</pubDate>
+        <lastBuildDate>Mon, 09 Oct 2023 14:26:24 +0800</lastBuildDate>
         <category>语言</category>
-        <category>数学</category>
-        <category>课堂学习</category>
+        <category>SQL</category>
+        <category>源码</category>
         <category>论文</category>
         <category>分布式</category>
         <category>计算机等级考试</category>
+        <category>数学</category>
+        <category>课堂学习</category>
+        <item>
+            <guid isPermalink="true">https://chendouxing.github.io/2023/10/09/%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%BA%E6%96%87/</guid>
+            <title>分布式论文</title>
+            <link>https://chendouxing.github.io/2023/10/09/%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%BA%E6%96%87/</link>
+            <category>论文</category>
+            <category>分布式</category>
+            <pubDate>Mon, 09 Oct 2023 14:26:24 +0800</pubDate>
+            <description><![CDATA[ &lt;link rel=&#34;stylesheet&#34; class=&#34;aplayer-secondary-style-marker&#34; href=&#34;\assets\css\APlayer.min.css&#34;&gt;&lt;script src=&#34;\assets\js\APlayer.min.js&#34; class=&#34;aplayer-secondary-script-marker&#34;&gt;&lt;/script&gt;&lt;h1 id=&#34;the-google-file-system&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#the-google-file-system&#34;&gt;#&lt;/a&gt; 《The Google File System》&lt;/h1&gt;
+&lt;p&gt;（谷歌文件系统 GFS）&lt;/p&gt;
+&lt;p&gt;组件故障是常态而不是例外。持续监控、错误检测、容错和自动恢复必须成为系统的组成部分。&lt;/p&gt;
+&lt;p&gt;按照传统的分布式文件系统，文件的大小是难以管理的，必须重新考虑设计假设和参数，如 I/O 操作和块大小。&lt;/p&gt;
+ ]]></description>
+        </item>
         <item>
             <guid isPermalink="true">https://chendouxing.github.io/2023/09/06/%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/</guid>
-            <title>分布式论文阅读</title>
+            <title>分布式理论</title>
             <link>https://chendouxing.github.io/2023/09/06/%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/</link>
             <category>论文</category>
             <category>分布式</category>
@@ -413,16 +426,14 @@
 &lt;p&gt;&lt;img src=&#34;/images/v2-a932cb62a02604d5ec57dc0a046a1414_r.jpg&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
 &lt;p&gt;Raft 与 Multi-Paxos 的不同：&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;/images/v2-7679d235c0ac8056552ba88b677e73a2_r.jpg&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
-&lt;hr&gt;
-&lt;h1 id=&#34;分布式论文&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#分布式论文&#34;&gt;#&lt;/a&gt; 分布式论文&lt;/h1&gt;
  ]]></description>
         </item>
         <item>
             <guid isPermalink="true">https://chendouxing.github.io/2023/08/31/postgre%E6%BA%90%E7%A0%81/</guid>
             <title>postgre源码</title>
             <link>https://chendouxing.github.io/2023/08/31/postgre%E6%BA%90%E7%A0%81/</link>
-            <category>源码</category>
             <category>SQL</category>
+            <category>源码</category>
             <pubDate>Thu, 31 Aug 2023 20:07:15 +0800</pubDate>
             <description><![CDATA[ &lt;link rel=&#34;stylesheet&#34; class=&#34;aplayer-secondary-style-marker&#34; href=&#34;\assets\css\APlayer.min.css&#34;&gt;&lt;script src=&#34;\assets\js\APlayer.min.js&#34; class=&#34;aplayer-secondary-script-marker&#34;&gt;&lt;/script&gt;&lt;h1 id=&#34;postgresql源码&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#postgresql源码&#34;&gt;#&lt;/a&gt; postgreSQL 源码&lt;/h1&gt;
  ]]></description>
@@ -660,8 +671,8 @@
             <guid isPermalink="true">https://chendouxing.github.io/2023/03/31/sql%E8%AF%AD%E5%8F%A5/</guid>
             <title>SQL语句</title>
             <link>https://chendouxing.github.io/2023/03/31/sql%E8%AF%AD%E5%8F%A5/</link>
-            <category>SQL</category>
             <category>语言</category>
+            <category>SQL</category>
             <pubDate>Fri, 31 Mar 2023 17:40:02 +0800</pubDate>
             <description><![CDATA[ &lt;link rel=&#34;stylesheet&#34; class=&#34;aplayer-secondary-style-marker&#34; href=&#34;\assets\css\APlayer.min.css&#34;&gt;&lt;script src=&#34;\assets\js\APlayer.min.js&#34; class=&#34;aplayer-secondary-script-marker&#34;&gt;&lt;/script&gt;&lt;h1 id=&#34;sql语句&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#sql语句&#34;&gt;#&lt;/a&gt; SQL 语句&lt;/h1&gt;
 &lt;h2 id=&#34;基本语句增删改查&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#基本语句增删改查&#34;&gt;#&lt;/a&gt; 基本语句–增删改查&lt;/h2&gt;
