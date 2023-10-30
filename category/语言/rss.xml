@@ -9,12 +9,12 @@
         <lastBuildDate>Fri, 31 Mar 2023 17:40:02 +0800</lastBuildDate>
         <category>源码</category>
         <category>SQL</category>
-        <category>数学</category>
-        <category>课堂学习</category>
+        <category>语言</category>
         <category>论文</category>
         <category>分布式</category>
+        <category>数学</category>
+        <category>课堂学习</category>
         <category>计算机等级考试</category>
-        <category>语言</category>
         <item>
             <guid isPermalink="true">https://chendouxing.github.io/2023/03/31/sql%E8%AF%AD%E5%8F%A5/</guid>
             <title>SQL语句</title>
@@ -47,6 +47,10 @@
 &lt;p&gt;查找购买价格小于 50 的客户名&lt;/p&gt;
 &lt;figure class=&#34;highlight sql&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;code class=&#34;hljs sql&#34;&gt;&lt;span class=&#34;hljs-keyword&#34;&gt;select&lt;/span&gt; 查询结果 &lt;span class=&#34;hljs-keyword&#34;&gt;from&lt;/span&gt; 表名 &lt;span class=&#34;hljs-keyword&#34;&gt;where&lt;/span&gt; 条件&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;&lt;img src=&#34;/images/image-20230331194433579.png&#34; alt=&#34;image-20230331194433579&#34;&gt;&lt;/p&gt;
+&lt;p&gt;删除数据表&lt;/p&gt;
+&lt;figure class=&#34;highlight sql&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;code class=&#34;hljs sql&#34;&gt;&lt;span class=&#34;hljs-keyword&#34;&gt;DROP&lt;/span&gt; &lt;span class=&#34;hljs-keyword&#34;&gt;TABLE&lt;/span&gt; table_name ;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;Like 子句&lt;/p&gt;
+&lt;figure class=&#34;highlight sql&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;code class=&#34;hljs sql&#34;&gt;&lt;span class=&#34;hljs-keyword&#34;&gt;SELECT&lt;/span&gt; &lt;span class=&#34;hljs-operator&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;hljs-keyword&#34;&gt;FROM&lt;/span&gt; table_name&lt;br&gt;&lt;span class=&#34;hljs-keyword&#34;&gt;WHERE&lt;/span&gt; field1 &lt;span class=&#34;hljs-keyword&#34;&gt;LIKE&lt;/span&gt; condition1;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
  ]]></description>
         </item>
     </channel>

@@ -9,12 +9,12 @@
         <lastBuildDate>Mon, 09 Oct 2023 14:26:24 +0800</lastBuildDate>
         <category>源码</category>
         <category>SQL</category>
-        <category>数学</category>
-        <category>课堂学习</category>
+        <category>语言</category>
         <category>论文</category>
         <category>分布式</category>
+        <category>数学</category>
+        <category>课堂学习</category>
         <category>计算机等级考试</category>
-        <category>语言</category>
         <item>
             <guid isPermalink="true">https://chendouxing.github.io/2023/10/09/%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%BA%E6%96%87/</guid>
             <title>分布式论文</title>
@@ -24,6 +24,7 @@
             <pubDate>Mon, 09 Oct 2023 14:26:24 +0800</pubDate>
             <description><![CDATA[ &lt;link rel=&#34;stylesheet&#34; class=&#34;aplayer-secondary-style-marker&#34; href=&#34;\assets\css\APlayer.min.css&#34;&gt;&lt;script src=&#34;\assets\js\APlayer.min.js&#34; class=&#34;aplayer-secondary-script-marker&#34;&gt;&lt;/script&gt;&lt;h1 id=&#34;the-google-file-system&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#the-google-file-system&#34;&gt;#&lt;/a&gt; 《The Google File System》&lt;/h1&gt;
 &lt;p&gt;（谷歌文件系统 GFS）&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://zhuanlan.zhihu.com/p/33944479&#34;&gt;Google File System 论文详析 - 知乎 (zhihu.com)&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;简介&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#简介&#34;&gt;#&lt;/a&gt; 简介&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -57,12 +58,44 @@
 &lt;h3 id=&#34;简单阅读的交互&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#简单阅读的交互&#34;&gt;#&lt;/a&gt; 简单阅读的交互&lt;/h3&gt;
 &lt;p&gt;首先，使用固定的块大小，客户端将应用程序指定的文件名和字节偏移量转换为文件中的块指数。然后，它向主服务器发送包含文件名和块索引的请求。主服务器用相应的块句柄和副本的位置进行回复，客户端使用文件名和块指数作为键来缓存这些信息。（主服务器告诉客户端目标文件在哪个块服务器）&lt;/p&gt;
 &lt;p&gt;然后客户端向其中一个副本（在块服务器中）发送请求，很可能是最近的副本。该请求指定块句柄和该块内的字节范围，在缓存信息过期或文件重新打开之前，对同一块的进一步读取不需要更多的客户端 - 主服务器交互。事实上，客户端通常在同一请求中请求多个块，并且主服务器还可以包括紧接在所请求的那些块之后的块的信息，这些额外的信息避开了几个未来的客户端 - 主服务器交互。&lt;/p&gt;
+&lt;h3 id=&#34;块大小&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#块大小&#34;&gt;#&lt;/a&gt; 块大小&lt;/h3&gt;
+&lt;p&gt;每个区块副本都作为普通的 Linux 文件存储在块服务器上，并且仅在需要时进行扩展，惰性空间分配避免了由于内部碎片而浪费空间。&lt;u&gt;（惰性空间分配时，空间的物理分配会尽可能延迟，直到累积了块大小大小的数据。换句话说，在磁盘上分配新块之前的决策过程在很大程度上受到要写入的数据大小的影响，即 64 MB 块的未使用部分最小化。【尽可能地填满前面的块，才开始创建写入后面的块】）&lt;/u&gt;&lt;/p&gt;
+&lt;p&gt;大块的优势：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;减少了客户端与主服务器交互的需求，因为对同一块的读写只需要向主服务器发出一个初始请求，以获取块的位置信息。这种减少对于我们的工作负载尤其重要，因为应用程序大多按顺序读取和写入大型文件。即使对于小的随机读取，客户端也可以轻松地缓存多 TB 工作集的所有块位置信息（原因与优势 3 一致，主要由于元数据会更小，更加便于存储到内存中。）&lt;/li&gt;
+&lt;li&gt;由于在大块上，客户端更有可能对给定的块执行许多操作，因此可以通过在延长的时间段内保持与块服务器的持久网络连接来减少网络开销。&lt;/li&gt;
+&lt;li&gt;减小了存储在主服务器上的元数据的大小，这允许我们将元数据保存在内存中，这又带来了其他优势。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;大块的缺点：&lt;/p&gt;
+&lt;p&gt;（使用惰性空间分配）&lt;/p&gt;
+&lt;p&gt;一个小文件可能由少量块组成，可能只有一个块。如果许多客户端正在访问同一个文件，存储这些块的块服务器可能会成为热点。在实践中，热点并不是一个主要问题，因为我们的应用程序大多顺序读取大型多块文件。（热点是常见问题）&lt;/p&gt;
+&lt;p&gt;当 GFS 首次被批处理队列系统使用时，热点确实出现了：一个可执行文件作为一个单一的块文件被写入 GFS，然后同时在数百台机器上启动，此时存储可执行文件的少数块服务器被数百个同时请求超载。&lt;strong&gt;解决方法：&lt;strong&gt;我们通过使用更高的复制因子存储这样的可执行文件，并通过使批处理队列系统错开应用程序的启动时间来解决这个问题。一个潜在的&lt;/strong&gt;长期解决方案&lt;/strong&gt;是允许客户端在这种情况下从其他客户端读取数据。&lt;/p&gt;
+&lt;h3 id=&#34;元数据&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#元数据&#34;&gt;#&lt;/a&gt; 元数据&lt;/h3&gt;
+&lt;p&gt;主服务器存储三种主要类型的元数据：&lt;strong&gt;文件和块命名空间&lt;/strong&gt;、&lt;strong&gt;从文件到块的映射&lt;/strong&gt;以及&lt;strong&gt;每个块的副本的位置&lt;/strong&gt;。所有元数据都保存在主存储器中。前两种类型（命名空间和文件到块的映射）通过将增量记录到存储在主机本地磁盘上的操作日志中并在远程机器上复制来保持持久性，使用日志使得我们可以简单、可靠地更新主服务器状态，并且在主服务器崩溃时不会有不一致的风险。&lt;strong&gt;主服务器不永久存储块位置信息&lt;/strong&gt;，&lt;strong&gt;相反，它会在主服务器启动时以及每当块服务器加入集群时询问每个块服务器的块位置信息&lt;/strong&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;一致性模型&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#一致性模型&#34;&gt;#&lt;/a&gt; 一致性模型&lt;/h3&gt;
+&lt;h2 id=&#34;系统交互&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#系统交互&#34;&gt;#&lt;/a&gt; 系统交互&lt;/h2&gt;
+&lt;p&gt;（描述客户端、主服务器和块服务器如何交互来实现数据变化、原子记录附加和快照。）&lt;/p&gt;
+&lt;h3 id=&#34;租约和修改顺序&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#租约和修改顺序&#34;&gt;#&lt;/a&gt; 租约和修改顺序&lt;/h3&gt;
+&lt;p&gt;变化是一种改变块的内容或元数据的操作，如写入或追加操作。&lt;strong&gt;每个变化在所有块的副本处执行&lt;/strong&gt;，使用租约来保持其一致的变化顺序。主节点向其中一个副本节点授予块租约，我们称之为原始节点（primary）。原始节点为块的所有变化选择一个连续的顺序。应用变化时，所有副本都遵循此顺序。因此，全局变化顺序首先由主服务器（master）选择的租约授予顺序来定义，并且在租约内由原始节点分配的序列号来定义。&lt;/p&gt;
+&lt;p&gt;租约机制旨在最小化主服务器处的管理开销。只要块发生变化，原始节点就可以无限期地请求并通常从主服务器接收扩展。这些扩展请求和授予被捎带在主服务器和所有块服务器之间定期交换的心跳消息上。主服务器有时可能试图在租约到期之前撤销租约（例如，当主服务器想要禁用正在被重命名的文件上的变化时）。即使主服务器失去了与原始节点的通信，它也可以在旧租约到期后安全地将新租约授予另一个副本。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;写的控制流程&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;客户端询问主服务器哪个块服务器持有块的当前租约以及其他副本的位置。如果没有块服务器具有租约，则主服务器将租约授予它选择的副本。&lt;/li&gt;
+&lt;li&gt;主服务器回复原始节点的标识和其他（辅助）副本的位置。客户端缓存该数据以用于将来的变化。只有当原始节点变得不可访问或答复它不再持有租约时，它才需要再次与主服务器联系。&lt;/li&gt;
+&lt;li&gt;客户端将数据推送到所有副本，客户端可以按任何顺序执行此操作。每个块服务器将数据存储在内部 LRU 缓冲区缓存中，直到数据被使用或失效。通过将数据流与控制流解耦，我们可以基于网络拓扑来调度昂贵的数据流来提高性能，而不管哪个块服务器是主要的（primary）。&lt;/li&gt;
+&lt;li&gt;一旦所有副本都确认收到数据，客户端就向原始节点发送写请求。该请求标识先前推送到所有副本的数据。原始节点将连续的序列号分配给它可能从多个客户端接收的所有变化，这提供了必要的序列化。它以序列号顺序将变化应用到它自己的本地状态。&lt;/li&gt;
+&lt;li&gt;原始节点将写入请求转发到所有辅助副本。每个辅助副本以由原始节点分配的相同序列号顺序应用增量。&lt;/li&gt;
+&lt;li&gt;副本都回复原始节点，表示它们已经完成了操作。&lt;/li&gt;
+&lt;li&gt;原始节点回复客户端。在任何副本中遇到的任何错误都将报告给客户端。如果出现错误，则可能在原始节点和辅助副本的任意子集上成功写入 (如果它在原始节点上发生故障，则不会为其分配序列号并转发），客户端请求被认为失败，并且修改的区域保持不一致状态。客户端代码通过重试失败的变化来处理此类错误。它将在步骤（3）到（7）中尝试几次，然后从写开始退回重试。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;/images/image-20231011181559699.png&#34; alt=&#34;image-20231011181559699&#34;&gt;&lt;/p&gt;
+&lt;p&gt;如果应用程序的写入操作很大或跨越块边界，GFS 客户端代码将其分解为多个写入操作。它们都遵循上述控制流程，但可能与来自其他客户端的并发操作交织并被其覆盖。因此，共享文件区域可能最终包含来自不同客户端的片段，尽管副本将是相同的，因为各个操作在所有副本上以相同的顺序成功完成，这使文件区域处于一致但未定义的状态。&lt;/p&gt;
  ]]></description>
         </item>
         <item>
-            <guid isPermalink="true">https://chendouxing.github.io/2023/09/06/%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/</guid>
+            <guid isPermalink="true">https://chendouxing.github.io/2023/09/06/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/</guid>
             <title>分布式理论</title>
-            <link>https://chendouxing.github.io/2023/09/06/%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%BA%E6%96%87%E9%98%85%E8%AF%BB/</link>
+            <link>https://chendouxing.github.io/2023/09/06/%E5%88%86%E5%B8%83%E5%BC%8F%E7%90%86%E8%AE%BA/</link>
             <category>论文</category>
             <category>分布式</category>
             <pubDate>Wed, 06 Sep 2023 14:38:56 +0800</pubDate>
@@ -730,6 +763,10 @@
 &lt;p&gt;查找购买价格小于 50 的客户名&lt;/p&gt;
 &lt;figure class=&#34;highlight sql&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;code class=&#34;hljs sql&#34;&gt;&lt;span class=&#34;hljs-keyword&#34;&gt;select&lt;/span&gt; 查询结果 &lt;span class=&#34;hljs-keyword&#34;&gt;from&lt;/span&gt; 表名 &lt;span class=&#34;hljs-keyword&#34;&gt;where&lt;/span&gt; 条件&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 &lt;p&gt;&lt;img src=&#34;/images/image-20230331194433579.png&#34; alt=&#34;image-20230331194433579&#34;&gt;&lt;/p&gt;
+&lt;p&gt;删除数据表&lt;/p&gt;
+&lt;figure class=&#34;highlight sql&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;code class=&#34;hljs sql&#34;&gt;&lt;span class=&#34;hljs-keyword&#34;&gt;DROP&lt;/span&gt; &lt;span class=&#34;hljs-keyword&#34;&gt;TABLE&lt;/span&gt; table_name ;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
+&lt;p&gt;Like 子句&lt;/p&gt;
+&lt;figure class=&#34;highlight sql&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;code class=&#34;hljs sql&#34;&gt;&lt;span class=&#34;hljs-keyword&#34;&gt;SELECT&lt;/span&gt; &lt;span class=&#34;hljs-operator&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;hljs-keyword&#34;&gt;FROM&lt;/span&gt; table_name&lt;br&gt;&lt;span class=&#34;hljs-keyword&#34;&gt;WHERE&lt;/span&gt; field1 &lt;span class=&#34;hljs-keyword&#34;&gt;LIKE&lt;/span&gt; condition1;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
  ]]></description>
         </item>
         <item>
