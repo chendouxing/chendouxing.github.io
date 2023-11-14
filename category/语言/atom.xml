@@ -4,14 +4,14 @@
     <title>蟹堡王海星 • Posts by &#34;语言&#34; category</title>
     <link href="https://chendouxing.github.io" />
     <updated>2023-03-31T09:40:02.000Z</updated>
-    <category term="源码" />
-    <category term="SQL" />
-    <category term="语言" />
     <category term="论文" />
     <category term="分布式" />
+    <category term="语言" />
+    <category term="SQL" />
+    <category term="源码" />
+    <category term="计算机等级考试" />
     <category term="数学" />
     <category term="课堂学习" />
-    <category term="计算机等级考试" />
     <entry>
         <id>https://chendouxing.github.io/2023/03/31/sql%E8%AF%AD%E5%8F%A5/</id>
         <title>SQL语句</title>
@@ -46,8 +46,8 @@
 &lt;p&gt;Like 子句&lt;/p&gt;
 &lt;figure class=&#34;highlight sql&#34;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&#34;gutter&#34;&gt;&lt;pre&gt;&lt;span class=&#34;line&#34;&gt;1&lt;/span&gt;&lt;br&gt;&lt;span class=&#34;line&#34;&gt;2&lt;/span&gt;&lt;br&gt;&lt;/pre&gt;&lt;/td&gt;&lt;td class=&#34;code&#34;&gt;&lt;pre&gt;&lt;code class=&#34;hljs sql&#34;&gt;&lt;span class=&#34;hljs-keyword&#34;&gt;SELECT&lt;/span&gt; &lt;span class=&#34;hljs-operator&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;hljs-keyword&#34;&gt;FROM&lt;/span&gt; table_name&lt;br&gt;&lt;span class=&#34;hljs-keyword&#34;&gt;WHERE&lt;/span&gt; field1 &lt;span class=&#34;hljs-keyword&#34;&gt;LIKE&lt;/span&gt; condition1;&lt;br&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/figure&gt;
 </content>
-        <category term="SQL" />
         <category term="语言" />
+        <category term="SQL" />
         <updated>2023-03-31T09:40:02.000Z</updated>
     </entry>
 </feed>
