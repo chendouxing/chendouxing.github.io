@@ -12,9 +12,9 @@
         <category>分布式</category>
         <category>方法</category>
         <category>论文</category>
+        <category>计算机等级考试</category>
         <category>数学</category>
         <category>课堂学习</category>
-        <category>计算机等级考试</category>
         <item>
             <guid isPermalink="true">https://chendouxing.github.io/2023/10/09/%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%BA%E6%96%87/</guid>
             <title>分布式论文</title>
@@ -609,6 +609,69 @@
 &lt;p&gt;当同时面对多个查询请求时，查询的吞吐和响应时间都是需要关注的性能指标。因此，分布式架构中的硬件资源需要按照特定的方式 [32, 36, 37] 合理地分配给不同的查询请求，从而促成多个查询请求的并行处理，进而在一定程度上保证了查询吞吐。此外，短时间内的大规模热点查询极易打破已有分布式架构的资源上限，使其无法及时扩容来支撑大规模的并行查询请求。为此，&lt;strong&gt;现有的查询处理方式大都采用表 1.1 中的共享处理 [30, 38–42] 和结果重用 [43–50] 技术来压缩多查询并行处理过程中的资源开销&lt;/strong&gt;，从而提升多查询的并行处理性能。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;共享处理&lt;/strong&gt;：核心思想是发掘出多个查询请求中的共享机会，并尝试利用这些机会来简化部分查询请求的处理过程，从而降低多查询并行处理过程中的资源开销，提升多查询的并行处理性能 [42]。&lt;strong&gt;共享处理旨在消除多查询处理过程中的重复工作，从而为多查询并行处理性能的提升节约了宝贵的硬件资源。&lt;/strong&gt;&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;结果重用&lt;/strong&gt;：核心思想是利用过往查询处理过程中的计算结果来简化当前查询的处理过程，从而降低多查询并行处理过程中的资源开销，提升多查询的并行处理性能。常用方法为&lt;strong&gt;通过在查询执行计划中引入物化操作（包含物化视图），使得过往查询中频繁使用的算子或子表达式的计算结果可以被缓存起来，以便后续多个查询的处理过程可以直接重用这部分计算结果（物化视图通过将特定（子）查询的结果存储在视图表中，后续相似的查询可以直接重用视图表中已有的查询结果），从而提升多查询的并行处理性能&lt;/strong&gt;。&lt;/p&gt;
+&lt;h1 id=&#34;分布式存储&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#分布式存储&#34;&gt;#&lt;/a&gt; 分布式存储&lt;/h1&gt;
+&lt;h2 id=&#34;存储方法&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#存储方法&#34;&gt;#&lt;/a&gt; 存储方法&lt;/h2&gt;
+&lt;h3 id=&#34;哈希表hash存储&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#哈希表hash存储&#34;&gt;#&lt;/a&gt; 哈希表（Hash）存储&lt;/h3&gt;
+&lt;p&gt;为了高效查找数据库中特定键的对应值，我们需要额外维护一个新的数据结构：索引。所有索引的基本想法都是&lt;strong&gt;保留额外的元数据，作为‘路标’帮助定位想要的数据&lt;/strong&gt;。索引不会影响数据内容，只会影响查询性能，对于写入，任何类型的索引都会降低写入速度，因为我们都需要在写入时更新索引。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;对文件进行顺序追加必然导致大量数据冗余，如何解决？&lt;br&gt;
+一般的解决方式是用后台线程，对文件进行定时的压缩合并，对于相同的键，只保留最新的值。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;如何删除数据？&lt;br&gt;
+删除数据在对应的数据上标记一个墓碑，在进行合并日志段时，一旦发现标记墓碑，就会丢弃该记录。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;内存安全&lt;br&gt;
+由于是对文件进行追加写，内存中的索引文件会丢失，但是具体的数据文件不会。可以通过扫描磁盘文件重新建立索引，但由于是 O（n）操作，在文件过大时会消耗大量时间。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;采用了 hash 索引为什么不在更新数据时进行原地更新覆盖，而是继续追加写呢？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;顺序写要比随机写性能高很多；&lt;/li&gt;
+&lt;li&gt;如果覆盖，我们无法在崩溃恢复时判断当前值是否是最新值；&lt;/li&gt;
+&lt;li&gt;避免出现碎片化问题。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;hash 索引的问题：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;hash 索引要求要能将所有的索引加载进内存。尽管理论上 hash 索引一部分存放在磁盘中仍然可以工作，但是磁盘上的哈希映射表现很差，因为访问 hash 索引存在大量的随机访问，不适用局部性原理，可能会导致磁盘和内存的不断替换；&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;区域查询效率太低，由于索引不是顺序的，区域查询只能使用逐个查找的方式查询每一个键。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;sstable&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#sstable&#34;&gt;#&lt;/a&gt; SSTable&lt;/h3&gt;
+&lt;p&gt;Sorted String Table (SSTable)–是存储，处理和交换数据集的最流行的输出之一。正如名字本身所包含的意思一样，SSTable 是一个简单的抽象，用来高效地存储大量的键 - 值对数据，同时做了优化来实现顺序读 / 写操作的高吞吐量。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;SStable 在功能上只是对 hash 加入了一个按键值排序。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;由于是排序数据，我们不必像 hash 索引一样记录所有数据的位置，索引可以是稀疏的，例如对于段文件中的上千条数据，只保留一个索引&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;例如：对于数据键 1~100000，我们每隔 1000 个数据保留一个索引，当查找 5500 时，对应索引应该是 5000，之后向后查找 500 条（或者使用二分）。&lt;/p&gt;
+&lt;p&gt;使用方法似乎很好理解，麻烦的是构建和维护 SStable。SStable 基本工作流程是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;写入时将内容插入内存中的排序数据结构（例如红黑树）&lt;/li&gt;
+&lt;li&gt;当内存大于一定阈值时将其写入磁盘，作为磁盘的一部分&lt;/li&gt;
+&lt;li&gt;如果接收到新的读取请求，要先尝试在内存中读取，其次是磁盘的最新排序部分，然后是次新的，依次类推&lt;/li&gt;
+&lt;li&gt;后台进程周期性将各个排序部分归并，并且出现相同数据时只会保留最新值。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如果使用 sstable，先进行内存写，所以我们也要考虑日志系统，类似 innodb 里 redolog 方式来保证持久性。&lt;/p&gt;
+&lt;h3 id=&#34;lsm-tree&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#lsm-tree&#34;&gt;#&lt;/a&gt; LSM-Tree&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;适合于 Key-value 型存储引擎&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;磁盘的顺序读写性能要比随机读写性能高 2 个数量级以上。日志结构指的是日志形式的追加写，它是顺序写。&lt;/p&gt;
+&lt;p&gt;LSM-Tree 最早建立在日志结构文件之上，现在基于合并和压缩排序文件原理的存储引擎都统称为 LSM 存储引擎。我们通常把 LSM 看成一种思想：保存在后台合并的一系列 SStable。&lt;/p&gt;
+&lt;p&gt;这种思想简单且有效：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;即使数据集远大于内存，LSM-tree 也能正常工作&lt;/li&gt;
+&lt;li&gt;由于键值有序，范围查询相比于 hash 表有很大优势&lt;/li&gt;
+&lt;li&gt;由于写入是顺序的（归并是后台线程在空闲时间做的）LSM-tree 可以提供非常高的写入吞吐量&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;优化：在 LSM 系统中查找一个不存在的键时会导致查询时间长，因为要从最新的数据一直往前查找，所以 lsm 一般会使用布隆过滤器进行优化&lt;/p&gt;
  ]]></description>
         </item>
     </channel>
