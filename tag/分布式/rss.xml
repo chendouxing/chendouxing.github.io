@@ -7,14 +7,14 @@
         <language>zh-CN</language>
         <pubDate>Mon, 09 Oct 2023 14:26:24 +0800</pubDate>
         <lastBuildDate>Mon, 09 Oct 2023 14:26:24 +0800</lastBuildDate>
-        <category>语言</category>
-        <category>SQL</category>
-        <category>数学</category>
-        <category>课堂学习</category>
         <category>分布式</category>
         <category>方法</category>
-        <category>计算机等级考试</category>
+        <category>语言</category>
+        <category>SQL</category>
         <category>论文</category>
+        <category>数学</category>
+        <category>课堂学习</category>
+        <category>计算机等级考试</category>
         <item>
             <guid isPermalink="true">https://chendouxing.github.io/2023/10/09/%E5%88%86%E5%B8%83%E5%BC%8F%E8%AE%BA%E6%96%87/</guid>
             <title>分布式论文</title>
@@ -182,16 +182,29 @@
 &lt;p&gt;Bigtable 依赖于一个高可用性和持久性的分布式锁服务，称为 Chubby 。一个 Chubby 服务由五个活动副本组成，其中一个被选为主服务器并主动服务请求。当大多数副本正在运行并且可以相互通信时，服务是活动的。Chubby 使用 Paxos 算法来保持其副本在面对失败时的一致性。Chubby 提供了一个由目录和小文件组成的命名空间。每个目录或文件都可以用作锁，对文件的读取和写入都是原子的。Chubby 客户端库提供 Chubby 文件的一致缓存。每一个 Chubby 客户端都维护一个与 Chubby 服务的会话。如果客户端无法在租约到期时间内续订其会话租约，则该客户端的会话将到期。当客户端的会话过期时，它将丢失所有锁和打开的句柄。Chubby 客户端还可以在 Chubby 文件和目录上注册回调，以通知更改或会话过期。&lt;/p&gt;
 &lt;p&gt;Bigtable 使用 Chubby 来完成各种任务：确保任何时候最多有一个活动的主服务器；存储 Bigtable 数据的引导位置；发现 tablet 服务器并确定 tablet 服务器的死亡，以及存储 Bigtable 模式。如果 Chubby 长时间不可用，Bigtable 也将不可用。&lt;/p&gt;
 &lt;h1 id=&#34;spanner-googles-globally-distributed-database&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#spanner-googles-globally-distributed-database&#34;&gt;#&lt;/a&gt; 《Spanner: Google’s Globally Distributed Database》&lt;/h1&gt;
-&lt;p&gt;1、介绍&lt;/p&gt;
+&lt;h2 id=&#34;介绍&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#介绍&#34;&gt;#&lt;/a&gt; 介绍&lt;/h2&gt;
 &lt;p&gt;spanner 可以随着数据量和服务器数量的增加，自动对数据进行跨节点分片和数据迁移，以达到负载均衡和故障转移。spanner 可以实现应用程序的高可用性，能应对大范围的自然灾害等故障。&lt;strong&gt;spanner 的重心是实现跨数据中心的数据强一致性和外部一致性，这些功能是通过 spanner 提供全局时间戳来实现的&lt;/strong&gt;。&lt;/p&gt;
-&lt;p&gt;2、基本原理&lt;/p&gt;
+&lt;h2 id=&#34;基本原理&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#基本原理&#34;&gt;#&lt;/a&gt; 基本原理&lt;/h2&gt;
 &lt;p&gt;spanner 有一个全局管理器（universemaster）和放置驱动程序（placement driver），每个区域（Zones）均含有一个主服务器（zonemaster）、多个位置代理（location proxy）和跨服务器（spanserver）。每个区域中，zonemaster 将数据分配给 spanserver，spanserver 向客户端提供数据，客户端通过位置代理来定位对其服务的 spanserver。全局管理器存储所有 zone 的状态信息，放置驱动程序（placement driver）处理跨区域的自动数据移动，放置驱动程序定期与跨区服务器通信，以查找需要移动的数据，来满足更新的复制约束或平衡负载。（自：每个 zone 类似于磁盘，主要用于存储数据和向客户端提供数据，全局管理器和放置驱动程序类似于主服务器，负责调度和存储各区域的状态信息）&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;/images/image-20231120165837699.png&#34; alt=&#34;image-20231120165837699&#34;&gt;&lt;/p&gt;
-&lt;p&gt;3、spanserver 的实现&lt;/p&gt;
+&lt;h2 id=&#34;spanserver的实现&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#spanserver的实现&#34;&gt;#&lt;/a&gt; spanserver 的实现&lt;/h2&gt;
 &lt;p&gt;与 Bigtable 不同，spanner 会为数据分配时间戳，在底层，每个 spanserver 负责多个 tablet 数据结构，tablet 的状态信息会存储在类似 B 树的文件和一个写前日志中，这些文件都存储在 Colossus 的文件系统中。spanserver 为每一个 tablet 分配一个 paxos，并且 paxos 将其元数据和日志存储到对应的 tablet 中。&lt;/p&gt;
 &lt;p&gt;每个副本（replica）的键值映射状态存储在其对应的 tablet 中，写操作必须在 leader 上启动 Paxos 协议，在任何足够新的副本上直接从底层 tablet 读取访问状态。副本集合共同组成一个 Paxos 组。spanserver 为每一个副本加上锁表来实现并发控制。&lt;/p&gt;
 &lt;p&gt;每个 spanserver 还实现了一个事务管理器来支持分布式事务。事务管理器用于实现参与领导者，组中的其他副本将被称为参与跟随者。如果一个事务只涉及一个 Paxos 组（大多数事务都是这样），那么它可以绕过事务管理器，因为锁表和 Paxos 一起提供事务性。如果事务涉及多个 Paxos 组，则这些组的领导者协调执行两阶段提交，选择一个参与者组作为协调器：该组的参与领导者将被称为协调器领导者，该组的跟随者将被称为协调器跟随者。每个事务管理器的状态都存储在底层 Paxos 组中。&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;/images/image-20231120184142870.png&#34; alt=&#34;image-20231120184142870&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;目录和放置&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#目录和放置&#34;&gt;#&lt;/a&gt; 目录和放置&lt;/h2&gt;
+&lt;p&gt;spanner 将一组共享公共前缀的连续键设为一个&lt;strong&gt;目录&lt;/strong&gt;，应用程序可以通过目录选择键来放置和寻找其数据的位置。（自：目录类似于 B + 树）&lt;/p&gt;
+&lt;p&gt;spanner 以目录为单位在 paxos 组之间进行移动（一个 paxos 组可以包含多个目录），将经常一起被访问的目录放在一组或将目录放置在离访问者最近的组。（自：目录加对应的数据一起移动）&lt;/p&gt;
+&lt;p&gt;spanner 中的 tablet 与 Bigtable 的 tablet 不同，Bigtable 的 tablet 是行空间的单个词典顺序上连续的分区，而 spanner 的 tablet 是一个容器，可以封装行空间的多个分区。（自：spanner 将多个频繁访问的目录放在一起作为一个 tablet）&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/image-20231121152641902.png&#34; alt=&#34;image-20231121152641902&#34;&gt;&lt;/p&gt;
+&lt;p&gt;spanner 移动目录通过增加一个后台任务 movedir，该任务在后台移动数据，以防止阻塞正常的写入和读取。（自：惰性移动，当没有任务执行时才移动数据）事实上，如果一个目录太大，Spanner 会将它分割成多个片段。片段可以从不同的 Paxos 组（因此是不同的服务器）提供服务。&lt;strong&gt;Movedir 实际上是在组之间移动片段，而不是整个目录&lt;/strong&gt;。&lt;/p&gt;
+&lt;h2 id=&#34;并发控制&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#并发控制&#34;&gt;#&lt;/a&gt; 并发控制&lt;/h2&gt;
+&lt;h3 id=&#34;时间戳管理&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#时间戳管理&#34;&gt;#&lt;/a&gt; 时间戳管理&lt;/h3&gt;
+&lt;p&gt;外部一致性事务&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;快照事务&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;快照事务中的读取在系统选择的时间戳执行而不锁定，因此传入的写入不会被阻止。快照读取是过去的读取，它在没有锁定的情况下执行。客户端可以为快照读取指定时间戳，也可以提供所需时间戳过期时间的上限并让 Spanner 选择时间戳。在任何一种情况下，快照读取的执行都将在足够新的任何副本上继续。&lt;/p&gt;
+&lt;p&gt;对于快照事务和快照读取，一旦选择了时间戳，提交是不可避免的，除非该时间戳处的数据已被垃圾收集。因此，客户端可以避免在重试循环内缓冲结果。当服务器出现故障时，客户端可以在内部通过重复时间戳和当前读取位置来在不同的服务器上继续查询。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;过去的非阻塞读取&lt;/strong&gt;&lt;/p&gt;
  ]]></description>
         </item>
         <item>
@@ -265,7 +278,7 @@
 &lt;h3 id=&#34;提交请求投票阶段&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#提交请求投票阶段&#34;&gt;#&lt;/a&gt; 提交请求（投票）阶段&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;协调者向所有参与者发送 prepare 请求与事务内容，询问是否可以准备事务提交，并等待参与者的响应。&lt;/li&gt;
-&lt;li&gt;参与者执行事务中包含的操作，并记录 undo 日志（用于回滚）和 redo 日志（用于重放），但不真正提交。&lt;/li&gt;
+&lt;li&gt;参与者执行事务中包含的操作，并记录 undo 日志（用于回滚）和 redo 日志（用于重做），但不真正提交。&lt;/li&gt;
 &lt;li&gt;参与者向协调者返回事务操作的执行结果，执行成功返回 yes，否则返回 no。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;提交执行阶段&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#提交执行阶段&#34;&gt;#&lt;/a&gt; 提交（执行）阶段&lt;/h3&gt;
@@ -278,7 +291,7 @@
 &lt;/ul&gt;
 &lt;p&gt;若有参与者返回 no 或者超时未返回，说明事务中断，需要回滚：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;协调者向所有参与者发送 rollback 请求。&lt;/li&gt;
+&lt;li&gt;协调者向所有参与者发送 rollback（回滚）请求。&lt;/li&gt;
 &lt;li&gt;参与者收到 rollback 请求后，根据 undo 日志回滚到事务执行前的状态，释放占用的事务资源，并向协调者返回 ack。&lt;/li&gt;
 &lt;li&gt;协调者收到所有参与者的 ack 消息，事务回滚完成。&lt;/li&gt;
 &lt;/ul&gt;
@@ -503,6 +516,7 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;paxos算法&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#paxos算法&#34;&gt;#&lt;/a&gt; Paxos 算法&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&#34;https://juejin.cn/post/7202557470341349431&#34;&gt;图解 paxos 论文《The Part-Time Parliament》 - 掘金 (juejin.cn)&lt;/a&gt;&lt;/p&gt;
 &lt;h4 id=&#34;算法流程&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#算法流程&#34;&gt;#&lt;/a&gt; 算法流程&lt;/h4&gt;
 &lt;p&gt;Paxos 算法解决的问题正是分布式一致性问题，即一个分布式系统中的各个进程如何就某个值（决议）达成一致。&lt;/p&gt;
 &lt;p&gt;Paxos 算法运行在允许宕机故障的异步系统中，不要求可靠的消息传递，可容忍消息丢失、延迟、乱序以及重复。它利用大多数 (Majority) 机制保证了 2F+1 的容错能力，即 2F+1 个节点的系统最多允许 F 个节点同时出现故障。&lt;/p&gt;
