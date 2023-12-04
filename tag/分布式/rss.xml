@@ -7,10 +7,10 @@
         <language>zh-CN</language>
         <pubDate>Mon, 09 Oct 2023 14:26:24 +0800</pubDate>
         <lastBuildDate>Mon, 09 Oct 2023 14:26:24 +0800</lastBuildDate>
-        <category>分布式</category>
-        <category>方法</category>
         <category>语言</category>
         <category>SQL</category>
+        <category>分布式</category>
+        <category>方法</category>
         <category>论文</category>
         <category>数学</category>
         <category>课堂学习</category>
@@ -200,11 +200,84 @@
 &lt;p&gt;spanner 移动目录通过增加一个后台任务 movedir，该任务在后台移动数据，以防止阻塞正常的写入和读取。（自：惰性移动，当没有任务执行时才移动数据）事实上，如果一个目录太大，Spanner 会将它分割成多个片段。片段可以从不同的 Paxos 组（因此是不同的服务器）提供服务。&lt;strong&gt;Movedir 实际上是在组之间移动片段，而不是整个目录&lt;/strong&gt;。&lt;/p&gt;
 &lt;h2 id=&#34;并发控制&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#并发控制&#34;&gt;#&lt;/a&gt; 并发控制&lt;/h2&gt;
 &lt;h3 id=&#34;时间戳管理&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#时间戳管理&#34;&gt;#&lt;/a&gt; 时间戳管理&lt;/h3&gt;
-&lt;p&gt;外部一致性事务&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;快照事务&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&#34;true-time&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#true-time&#34;&gt;#&lt;/a&gt; True Time&lt;/h4&gt;
+&lt;p&gt;Spanner 的 TrueTime 是利用 GPS 时钟和原子钟实现的，可以提供非常精确的时钟，使得每台机器上的本地时间戳和 absolute time 误差在 ε 之间。TrueTime API TT.now () 返回一个区间 [earlist, latest], 保证 absolute time 是在区间以内，即 earliest ≤ absolute time ≤ latest。所以 latest - earlist = 2ε，(earlist, + latest) / 2 为本地时间戳。&lt;/p&gt;
+&lt;p&gt;当 A 事务进行提交时，选择 TT.now ().latest 作为事务提交时间戳 commitA_ts，并且等待 2ε 时间后再进行提交。这样做的原因是让提交时的 absolute time 大于 commitA_ts。那么当另一个节点的 B 事务在 absolute time 之后再开启，那么其提交时选定的事务提交时间戳 commitB_ts 必定是大于 absolute time 的。&lt;/p&gt;
+&lt;p&gt;为什么要求 B 事务一定要在 A 事务提交之后再开启呢？因为 B 事务如果在 A 事务提交之前开启，那么 B 事务开启时的 absolute time 可能小于 commitA_ts，那么 B 事务选定的 commitB_ts 可能大于 absolute time 且小于 commitA_ts。&lt;/p&gt;
+&lt;p&gt;TrueTime 的面向的对象是时间上没有重叠的两个事务，先提交的事务的时间戳，必定小于后提交事务的时间戳。这保证了连续写事务的线性一致性。当写事务 A 提交之后，absolute time &amp;gt; commitA_ts，则此时开启一个读事务，将 TT.now ().latest 作为其 snapshot_read_ts，则可以保证 snapshot_read_ts&amp;gt; absolute time &amp;gt; commitA_ts，即读取到写事务的数据。&lt;/p&gt;
+&lt;h4 id=&#34;快照事务&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#快照事务&#34;&gt;#&lt;/a&gt; &lt;strong&gt;快照事务&lt;/strong&gt;&lt;/h4&gt;
 &lt;p&gt;快照事务中的读取在系统选择的时间戳执行而不锁定，因此传入的写入不会被阻止。快照读取是过去的读取，它在没有锁定的情况下执行。客户端可以为快照读取指定时间戳，也可以提供所需时间戳过期时间的上限并让 Spanner 选择时间戳。在任何一种情况下，快照读取的执行都将在足够新的任何副本上继续。&lt;/p&gt;
-&lt;p&gt;对于快照事务和快照读取，一旦选择了时间戳，提交是不可避免的，除非该时间戳处的数据已被垃圾收集。因此，客户端可以避免在重试循环内缓冲结果。当服务器出现故障时，客户端可以在内部通过重复时间戳和当前读取位置来在不同的服务器上继续查询。&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;过去的非阻塞读取&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;对于快照事务和快照读取，一旦选择了时间戳，提交是不可避免的，除非该时间戳处的数据已被垃圾收集。因此，客户端可以避免在重试循环内缓冲结果。当服务器出现故障时，客户端可以在内部通过重复时间戳和当前读取位置来在不同的服务器上继续查询。&lt;/em&gt;&lt;/p&gt;
+&lt;h3 id=&#34;读写事务&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#读写事务&#34;&gt;#&lt;/a&gt; 读写事务&lt;/h3&gt;
+&lt;p&gt;事务的读取不会看到事务写入的效果，读操作会返回任何数据读取的时间戳，而未提交的写操作还没有被分配时间戳。（自：未提交的事务数据不会被读取到，否则就属于脏读）&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;客户端读取过程&lt;/strong&gt;：客户端向 paxos 组发送读请求，leader 的副本获取读锁，读取最新数据，当客户端事务保持打开时，它会发送保持连接消息，以防止领导者使其事务超时。当客户端完成所有读取并缓冲所有写入时，它将开始两阶段提交，客户端选择一个协调器组（自：实现 paxos 组之间通信），并向每个协调组的 leader 发送提交消息，其中包含协调器的身份和任何缓冲的写入。&lt;/p&gt;
+&lt;h1 id=&#34;deepo-a-learned-query-optimizer&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#deepo-a-learned-query-optimizer&#34;&gt;#&lt;/a&gt; 《DeepO: A Learned Query Optimizer》&lt;/h1&gt;
+&lt;p&gt;DeepO 是一个基于深度学习的查询优化器，对查询执行计划进行训练，DeepO 将提供具有较小估计成本和相对较高置信度的 top-K 提示，以供用户选择，并在后期与 postgreSQL 进行嵌入，与基线优化器相比，查询时间得到缩短。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;/images/image-20231123141314177.png&#34; alt=&#34;image-20231123141314177&#34;&gt;&lt;/p&gt;
+&lt;h2 id=&#34;deepo工作流程&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#deepo工作流程&#34;&gt;#&lt;/a&gt; DeepO 工作流程&lt;/h2&gt;
+&lt;p&gt;如图 1 所示，DeepO 由两个阶段组成：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;离线成本学习阶段，收集历史查询处理日志并训练基于学习的成本学习器&lt;/p&gt;
+&lt;p&gt;DeepO 收集 postgreSQL 的历史查询计划日志，将查询计划及相应成本作为后面成本学习器的训练数据，使用监督的方式对模型进行训练。总过程分为三个步骤：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;算子嵌入&lt;/p&gt;
+&lt;p&gt;查询计划的所有操作符被嵌入到密集的和有代表性的特征向量中，针对叶算子和非叶算子分别设计了不同的嵌入策略，以捕捉底层复杂的查询特征。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;计划嵌入&lt;/p&gt;
+&lt;p&gt;根据查询执行计划将嵌入的操作符转换为树结构格式。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;成本学习&lt;/p&gt;
+&lt;p&gt;嵌入式计划被用作训练神经网络的输入，采用树结构网络来处理查询计划向量，并使用贝叶斯神经网络来修改网络，这样可以为查询计划提供置信度感知的成本估计。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在线优化阶段，DeepO 为用户提供查询优化提示和相应的估计成本&lt;/p&gt;
+&lt;p&gt;DeepO 为新查询生成一组候选优化提示，DeepO 获取候选优化提示后，并发生成多个查询执行计划，这些查询计划发送到成本学习器，学习器对其进行成本和置信度估计，结果排名器返回具有最小成本和置信度的前 K 个优化提示 (Top-k)，最终返回至 Web UI 让用户进行选择，并使用提示短语描述优化方法。但数据库模式发生改变时，或遇到新的执行计划，DeepO 将退至 postgreSQL 的优化器，并将该执行计划放入训练数据中，重新训练模型。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;DeepO 成本学习器的成本学习任务为监督学习，将查询计划作为输入，实际查询延迟作为标签。&lt;/p&gt;
+&lt;h1 id=&#34;parallel-query-processing-to-separate-communication-from-computation&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#parallel-query-processing-to-separate-communication-from-computation&#34;&gt;#&lt;/a&gt; 《Parallel Query Processing: To Separate Communication from Computation》&lt;/h1&gt;
+&lt;h1 id=&#34;photon-a-fast-query-engine-for-lakehouse-systems&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#photon-a-fast-query-engine-for-lakehouse-systems&#34;&gt;#&lt;/a&gt; 《Photon: A Fast Query Engine for Lakehouse Systems》&lt;/h1&gt;
+&lt;h2 id=&#34;介绍-2&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#介绍-2&#34;&gt;#&lt;/a&gt; 介绍&lt;/h2&gt;
+&lt;h3 id=&#34;lakehouse&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#lakehouse&#34;&gt;#&lt;/a&gt; Lakehouse&lt;/h3&gt;
+&lt;p&gt;Lakehouse（湖仓一体）：一种数据管理范式，该范式在非结构化数据湖之上实现结构化数据仓库的功能。该体系结构直接在数据湖上实现数据仓库功能，如治理、ACID 事务和丰富的 SQL 支持。这种单层方法承诺简化数据管理，因为用户可以以统一的方式管理和查询他们的所有数据，并且需要管理的 ETL 步骤和查询引擎更少。&lt;/p&gt;
+&lt;p&gt;Lakehouse 平台由四个主要组件组成：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;原始数据湖存储层：将数据存储与计算相结合，数据本身以开放文件格式存储，例如 Apache Parquet。&lt;/li&gt;
+&lt;li&gt;自动数据管理层：用于实现仓库式事务和回滚等功能。&lt;/li&gt;
+&lt;li&gt;弹性执行层：用于执行分析工作负载&lt;/li&gt;
+&lt;li&gt;用户界面：客户通过该界面与数据进行交互。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;photon&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#photon&#34;&gt;#&lt;/a&gt; Photon&lt;/h3&gt;
+&lt;p&gt;Photon：一种矢量化查询引擎，该引擎需要在数据湖中无处不在的原始未经管理的数据集上提供良好的性能，并在以 Apache Parquet 等流行列式文件格式存储的结构化数据上提供出色的性能。&lt;/p&gt;
+&lt;h1 id=&#34;sparksql-next-generation-query-planning-over-spark&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#sparksql-next-generation-query-planning-over-spark&#34;&gt;#&lt;/a&gt; 《SparkSQL+: Next-generation Query Planning over Spark》&lt;/h1&gt;
+&lt;h2 id=&#34;介绍-3&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#介绍-3&#34;&gt;#&lt;/a&gt; 介绍&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;SparkSQL+&lt;/strong&gt;：相较于 SparkSQL，在原来的基础上加上新的查询计划（广义超树分解 [GHD]、最坏情况最优连接算法 [WCOJ]、带比较的合取查询 [CQC]）和提供了一个供用户自由选择查询计划的 Web 平台。&lt;/p&gt;
+&lt;p&gt;SPJ 查询：选择–投影–连接。&lt;/p&gt;
+&lt;p&gt;N：所有输入关系的总大小；OUT：查询结果的大小。&lt;/p&gt;
+&lt;p&gt;对于 SJ 查询的经典查询计划，首先计算多路连接，然后通过谓词过滤连接结果。若使用 CQC 算法，谓词过滤后，查询结果变小。&lt;/p&gt;
+&lt;p&gt;下一代查询算法（next-generation）&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;SparkSQL + 优势&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;提供一个更公平的平台来比较经典查询计划和新的查询计划（其底层由相同的 Spark 核心执行，生成经典查询计划）&lt;/li&gt;
+&lt;li&gt;SparkSQL 容易集成到 Spark 生态系统中&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;系统架构&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#系统架构&#34;&gt;#&lt;/a&gt; 系统架构&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&#34;/images/image-20231204144015615.png&#34; alt=&#34;image-20231204144015615&#34;&gt;&lt;/p&gt;
+&lt;p&gt;1、将查询转换为 scala 代码，经历用户界面、解析器、查询计划器和代码生成器&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;用户界面：SparkSQL + 提供命令行和 Web 界面（命令行用于 SparkSQL + 与其他系统集成，Web 界面使得用户可以选择不同的查询计划）&lt;/li&gt;
+&lt;li&gt;解析器：将 SQL 查询转换为逻辑计划 (图 3 [a])&lt;/li&gt;
+&lt;li&gt;查询计划器：将逻辑计划转换为关系超图和一组比较谓词 (图 3 [b])，检查查询是否循环，如果是循环的，则会找到一个 GHD，运行 GYO 算法来寻找所有候选连接树及其支持的比较超图 (图 3 [c])，用户可以选择其中之一，中间的连接树的比较超图如图 3 (d)。选择连接树后，计划器生成查询计划，该计划由编译操作组成（告诉代码生成器需要生成什么）&lt;/li&gt;
+&lt;li&gt;代码生成器：将编译操作转换为物理计划，为了消除冗余，SparkSQL + 在生成物理计划时尽可能多地重用 RDD。&lt;/li&gt;
+&lt;li&gt;SparkSQL + 库：帮助生成物理计划，实际上计划器不是生成物理计划，而是生成调用 SparkSQL + 库 API 的 scala 代码，然后，SparkSQL + 库将这些 API 转换为标准的 RDD 操作符。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;2、将 scala 代码编译为 JAR，并提交到 Spark 集群&lt;/p&gt;
  ]]></description>
         </item>
         <item>
@@ -464,6 +537,19 @@
 &lt;/ul&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;一致性算法&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#一致性算法&#34;&gt;#&lt;/a&gt; 一致性算法&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;一致性针对的是对单对象的单个操作之间的可见性；隔离性（序列化）指的是的事务多个对象的多个操作之间的可见性&lt;/strong&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;外部一致性&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#外部一致性&#34;&gt;#&lt;/a&gt; 外部一致性&lt;/h3&gt;
+&lt;p&gt;&lt;strong&gt;外部一致性即是在数据库事务之上实现线性一致性，即物理时间上不相交的两个事务之间的可见性&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;在物理时间上先后发生的事务间（执行区间不重叠，它们的在时间线上的顺序由用户确定，数据库无法感知到他们之间的关系），数据如何相互可见的性质。外部一致性的目标是：假设事务 T1 执行完成后，T2 才启动，保证让 T2 看到 T1 的结果。&lt;/p&gt;
+&lt;p&gt;我们很容易把分布式副本一致性和分布式事务外部一致性搞混，因为他们的表现非常相像：首先客户端写入一条数据 write (x, 4)，然后客户端读取数据 read (x)，但是却返回空。两者虽然表现是一样的，但是产生的原因却完全不同。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对于分布式副本一致性，产生这种现象的原因是：客户端写入数据后，数据副本还未复制到全部存储节点就返回客户端成功（弱一致性）。当客户端读取时，正好访问到未成功复制副本的存储节点，返回空。&lt;/li&gt;
+&lt;li&gt;对于分布式事务外部一致性，产生的原因是：客户端写入数据发生在节点 A，节点 A 利用本地时间戳 localA_ts 作为事务提交的时间戳 commit_ts。客户端读取数据时发生在节点 B，节点 B 利用本地时间戳 localB_ts，作为事务读取的时间戳 snapshot_read_ts。由于多节点的时钟偏移，很可能出现 snapshot_read_ts &amp;lt; commit_ts，这样就会误以为读取是在写入之前发生的，从而返回空。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;内部一致性&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#内部一致性&#34;&gt;#&lt;/a&gt; 内部一致性&lt;/h3&gt;
+&lt;p&gt;多个并发事务读写的数据（或数据范围），它们能够被数据库感知到冲突（读写之间也算冲突），因此它们在时间线上的顺序由数据库确定，这样的事务间一致性问题可以被认为是内部一致性问题。&lt;/p&gt;
+&lt;p&gt;分布式事务的内外一致性描述的是&lt;strong&gt;多个事务间的数据的可见性&lt;/strong&gt;。 &lt;strong&gt;“内部” 和 “外部” 最重要的区别是可见顺序由数据库（内部）确定，还是由用户（外部）确定&lt;/strong&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;一致性算法分类&#34;&gt;&lt;a class=&#34;markdownIt-Anchor&#34; href=&#34;#一致性算法分类&#34;&gt;#&lt;/a&gt; 一致性算法分类&lt;/h3&gt;
 &lt;p&gt;1、为什么需要一致性算法？&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;数据不能存在单个节点（主机）上，否则可能出现单点故障。&lt;/li&gt;
